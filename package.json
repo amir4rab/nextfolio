@@ -1,7 +1,17 @@
 {
   "name": "nextfolio",
   "version": "0.1.0",
+  "license": "GPL-3.0",
   "private": true,
+  "author": {
+    "name": "Amir Arab",
+    "email": "contact@amir4rab.com",
+    "url": "http://amir4rab.com/"
+  },
+  "description": "My personal portfolio",
+  "homepage": "https://amir4rab.com",
+  "projectUrl": "https://github.com/amir4rab/nextfolio",
+  "repository": "https://github.com/amir4rab/nextfolio",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -25,5 +35,9 @@
     "eslint-plugin-react": "^7.30.1",
     "prettier": "^2.7.1",
     "typescript": "4.7.4"
+  },
+  "engines": {
+    "node": "18.7.0",
+    "pnpm": "7.9.3"
   }
 }
