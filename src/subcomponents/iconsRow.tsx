@@ -1,10 +1,16 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 
 // react-icons
 import type { IconType } from 'react-icons';
 
 // mantine
-import { createStyles, keyframes } from '@mantine/styles';
+import {
+  createStyles,
+  keyframes,
+  CSSObject,
+  MantineTheme,
+  useMantineTheme
+} from '@mantine/styles';
 
 export interface IconsRowProps {
   icons: {
@@ -14,15 +20,6 @@ export interface IconsRowProps {
 }
 
 // keyframes
-const slidingAnimation = keyframes({
-  '0%': {
-    left: '-2.5rem'
-  },
-  '100%': {
-    left: 'calc( 100% + 2.5vw)'
-  }
-});
-
 const animateIn = keyframes({
   from: {
     opacity: 0,
@@ -62,7 +59,6 @@ const useStyles = createStyles((t) => ({
     opacity: 0.5,
     fontSize: '2rem',
     transition: 'opacity .3s ease-in-out, color .15s ease-in-out',
-    transform: 'translate(0, -50%)',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -72,14 +68,8 @@ const useStyles = createStyles((t) => ({
     ['&:hover']: {
       opacity: 1,
       color: t.primaryColor
-    },
-    animation: `${slidingAnimation} linear forwards infinite`,
-    [t.fn.largerThan('md')]: {
-      animationDuration: '20s'
-    },
-    [t.fn.smallerThan('md')]: {
-      animationDuration: '10s'
     }
+    // animation: `${slidingAnimation} linear forwards infinite`,
   },
   iconPaused: {
     animationPlayState: 'paused !important'
@@ -105,17 +95,60 @@ const getTiming = (
   return parseFloat(durationNeededForPadding.toFixed(2));
 };
 
+const useIconStyles = createStyles((t, styles?: CSSObject) => ({
+  wrapper: {
+    display: 'block',
+    [t.fn.largerThan('md')]: {
+      animationDuration: '20s'
+    },
+    [t.fn.smallerThan('md')]: {
+      animationDuration: '10s'
+    },
+    ...styles
+  }
+}));
+
+interface IconWrapperProps {
+  href: string;
+  key?: string | number;
+  className: string;
+  children: ReactNode;
+  styles: (t: MantineTheme) => CSSObject;
+}
+
+const IconWrapper = ({
+  styles,
+  className,
+  children,
+  ...props
+}: IconWrapperProps) => {
+  const t = useMantineTheme();
+  const { classes, cx } = useIconStyles(styles(t));
+
+  return (
+    <a
+      {...props}
+      target='_blank'
+      rel='noreferrer'
+      className={cx(className, classes.wrapper)}>
+      {children}
+    </a>
+  );
+};
+
 const IconsRow = ({ icons }: IconsRowProps) => {
   const { classes, cx } = useStyles();
   const [hovered, setHovered] = useState(false);
   const [delayLength, setDelayLength] = useState<null | number>(null);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const wrapperWidth = useRef(0);
 
   const animationCalculations = useCallback(() => {
     if (wrapperRef.current === null) return;
 
     const isDesktop = window.matchMedia('(min-width: 966px)').matches;
     const width = wrapperRef.current.getBoundingClientRect().width;
+    wrapperWidth.current = width;
 
     const delay = getTiming(icons.length, width, isDesktop);
 
@@ -144,18 +177,27 @@ const IconsRow = ({ icons }: IconsRowProps) => {
         {delayLength !== null &&
           icons.map(({ icon, href }, i) => {
             const I = icon;
+
+            const slidingAnimation = keyframes({
+              '0%': {
+                transform: 'translate(-2.5rem, -50%)'
+              },
+              '100%': {
+                transform: `translate(calc( ${wrapperWidth.current}px + 2.5rem), -50%)`
+              }
+            });
+
             return (
-              <a
+              <IconWrapper
                 href={href}
-                target='_blank'
-                rel='noreferrer'
                 key={i}
-                className={cx(classes.icon, hovered && classes.iconPaused)}
-                style={{
-                  animationDelay: i * delayLength + 's'
-                }}>
+                styles={() => ({
+                  animation: `${slidingAnimation} linear forwards infinite`,
+                  animationDelay: `${i * delayLength}s`
+                })}
+                className={cx(classes.icon, hovered && classes.iconPaused)}>
                 <I />
-              </a>
+              </IconWrapper>
             );
           })}
       </div>
