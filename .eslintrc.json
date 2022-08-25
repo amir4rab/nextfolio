@@ -18,7 +18,8 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
-    "react/react-in-jsx-scope": 0
+    "react/react-in-jsx-scope": 0,
+    "@next/next/no-img-element": 0
   },
   "ignorePatterns": ["node_modules/", "out", ".next/"]
 }
