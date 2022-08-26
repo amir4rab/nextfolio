@@ -1,13 +1,20 @@
-import { ReactNode } from 'react';
+import { Suspense } from 'react';
+import type { ReactNode } from 'react';
+
+// next
+import dynamic from 'next/dynamic';
 
 // mantine
 import { createStyles } from '@mantine/styles';
 
 // components
 import DesktopNavbar from './desktopNavbar';
+const AuroraBackground = dynamic(() => import('./auroraBackground'), {
+  suspense: true
+});
 
 // constants
-const desktopMaxWidth = 800;
+const desktopMaxWidth = 966;
 
 const useStyles = createStyles((t) => ({
   main: {
@@ -16,7 +23,7 @@ const useStyles = createStyles((t) => ({
       maxWidth: desktopMaxWidth
     },
     [t.fn.smallerThan('md')]: {
-      padding: t.spacing.md
+      padding: `0 ${t.spacing.md}px ${t.spacing.md}px ${t.spacing.md}px`
     }
   }
 }));
@@ -42,6 +49,9 @@ const Layout = ({ children }: Props) => {
         <DesktopNavbar.Item href='/projects'>Projects</DesktopNavbar.Item>
         <DesktopNavbar.Item href='/blog'>Blog</DesktopNavbar.Item>
       </DesktopNavbar>
+      <Suspense>
+        <AuroraBackground />
+      </Suspense>
       <main className={classes.main}>{children}</main>
     </>
   );
