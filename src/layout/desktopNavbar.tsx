@@ -35,9 +35,6 @@ const useStyles = createStyles((t, desktopMaxWidth: number) => ({
       maxWidth: desktopMaxWidth,
       margin: '0 auto'
     },
-    [t.fn.smallerThan('md')]: {
-      padding: t.spacing.md
-    },
     position: 'relative',
     overflow: 'hidden',
     padding: t.spacing.xs
@@ -72,7 +69,9 @@ const useStyles = createStyles((t, desktopMaxWidth: number) => ({
     },
     [t.fn.smallerThan('md')]: {
       margin: 0,
-      color: t.primaryColor
+      color: t.primaryColor,
+      display: 'block',
+      textAlign: 'center'
     }
   },
   item: {

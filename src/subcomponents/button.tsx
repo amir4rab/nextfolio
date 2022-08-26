@@ -15,7 +15,7 @@ const useStyles = createStyles((t, styles?: CSSObject) => ({
     color: t.white,
     padding: `${t.spacing.md * 0.75}px ${t.spacing.lg * 1.25}px`,
     fontWeight: 600,
-    fontSize: t.fontSizes.md,
+    fontSize: t.fontSizes.sm,
     border: 'none',
     borderRadius: t.radius.md,
     overflow: 'hidden',
