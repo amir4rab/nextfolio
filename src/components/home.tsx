@@ -3,6 +3,9 @@ import { Suspense } from 'react';
 // next
 import dynamic from 'next/dynamic';
 
+// types
+import { GetGhResult } from '@/utils/backend/getGh';
+
 // components
 import HomeCard from '@/subcomponents/homeCard';
 
@@ -16,6 +19,9 @@ const HighlightedApplicationsCard = dynamic(
     suspense: true
   }
 );
+const GhDisplay = dynamic(() => import('@/subcomponents/ghDisplay'), {
+  suspense: true
+});
 
 // icons
 import {
@@ -37,7 +43,11 @@ const iconsArray = [
   { href: 'https://www.framer.com/motion/', icon: SiFramer }
 ];
 
-const Home = () => {
+interface Props {
+  ghData: GetGhResult;
+}
+
+const Home = ({ ghData }: Props) => {
   return (
     <>
       <header>
@@ -48,6 +58,9 @@ const Home = () => {
       </Suspense>
       <Suspense>
         <HighlightedApplicationsCard />
+      </Suspense>
+      <Suspense>
+        <GhDisplay ghData={ghData} />
       </Suspense>
       <div style={{ height: '500vh' }} />
     </>
