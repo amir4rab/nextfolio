@@ -1,9 +1,11 @@
 {
   "cSpell.words": [
+    "Frontmatter",
     "Nextfolio",
     "subcomponents"
   ],
   "material-icon-theme.folders.associations": {
-    "subcomponents": "components"
+    "subcomponents": "components",
+    "blogs": "markdown"
   }
 }
