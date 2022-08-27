@@ -57,17 +57,19 @@ const useStyles = createStyles((t) => ({
     fontWeight: 600
   },
   name: {
-    padding: `${t.spacing.xs}px ${t.spacing.md}px`,
-    borderRadius: t.radius.sm,
     background: 'transparent',
-    color: t.primaryColor,
-    transition: 'color .1s ease-in-out, background-color .1s ease-in-out',
     textDecoration: 'none',
     userSelect: 'none',
-    ['&:hover']: {
-      background: t.colors[t.primaryColor][3],
-      color: t.black,
-      cursor: 'pointer'
+    color: t.primaryColor,
+    [t.fn.largerThan('md')]: {
+      padding: t.spacing.xs * 0.75,
+      borderRadius: t.radius.sm,
+      transition: 'color .1s ease-in-out, background-color .1s ease-in-out',
+      ['&:hover']: {
+        background: t.colors[t.primaryColor][3],
+        color: t.black,
+        cursor: 'pointer'
+      }
     }
   },
   titleText: {

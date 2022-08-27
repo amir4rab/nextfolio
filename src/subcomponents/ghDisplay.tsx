@@ -79,10 +79,17 @@ const useStyles = createStyles((t) => ({
     borderRadius: t.radius.lg,
     background:
       t.colorScheme === 'dark'
-        ? t.colors.dark[4] + '50'
-        : t.colors.gray[3] + '50',
-    backdropFilter: 'blur(.5rem)',
-    boxShadow: t.shadows.md
+        ? t.colors.dark[5] + 'a0'
+        : t.colors.gray[3] + 'a0',
+    boxShadow: t.shadows.md,
+    [t.fn.largerThan('md')]: {
+      opacity: 0.75,
+      transition: 'transform .15s ease-in-out, opacity .15s ease-in-out',
+      ['&:hover']: {
+        transform: 'translate(0, -.1rem)',
+        opacity: 1
+      }
+    }
   },
   cardTitle: {
     marginBottom: t.spacing.xl,
