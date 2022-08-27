@@ -19,8 +19,6 @@
       "@/components/*": ["src/components/*"],
       "@/subcomponents/*": ["src/subcomponents/*"],
       "@/layout": ["src/layout"],
-      "@/swr-fetcher": ["src/swr"],
-      "@/data/*": ["src/data/*"],
       "@/utils/*": ["src/utils/*"],
       "@/hooks/*": ["src/hooks/*"],
       "@/providers/*": ["src/providers/*"],
