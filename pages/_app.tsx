@@ -1,6 +1,7 @@
 // next
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import '@/styles/code.css';
 import MantineProvider from '@/providers/mantineProvider';
 
 export default function App(props: AppProps) {
