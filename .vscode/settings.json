@@ -1,11 +1,15 @@
 {
   "cSpell.words": [
+    "Contentful",
     "Frontmatter",
     "Nextfolio",
     "subcomponents"
   ],
   "material-icon-theme.folders.associations": {
     "subcomponents": "components",
-    "blogs": "markdown"
+    "blogs": "markdown",
+    "markdown-media": "images",
+    "highlighted": "images",
+    "backgrounds": "images"
   }
 }

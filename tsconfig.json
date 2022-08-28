@@ -20,6 +20,7 @@
       "@/subcomponents/*": ["src/subcomponents/*"],
       "@/layout": ["src/layout"],
       "@/utils/*": ["src/utils/*"],
+      "@/styles/*": ["src/styles/*"],
       "@/hooks/*": ["src/hooks/*"],
       "@/providers/*": ["src/providers/*"],
       "@/types/*": ["src/types/*"]
