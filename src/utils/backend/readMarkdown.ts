@@ -5,11 +5,14 @@ import { cwd } from 'process';
 // third party utils
 import { serialize } from 'next-mdx-remote/serialize';
 
+import rehypePrism from 'rehype-prism-plus/common';
+
 // types
 import type { MDXRemoteSerializeResult } from 'next-mdx-remote';
+import type { MarkdownFolders } from '@/types/markdownFrontmatter';
 
 export interface ReadMarkdownProps {
-  folder: 'blogs' | 'projects';
+  folder: MarkdownFolders;
   filename: string;
 }
 
@@ -27,7 +30,10 @@ const readMarkdown = async ({
     }
   );
   const mdxSource = await serialize(markdown, {
-    parseFrontmatter: true
+    parseFrontmatter: true,
+    mdxOptions: {
+      rehypePlugins: [rehypePrism]
+    }
   });
 
   return mdxSource;

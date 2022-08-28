@@ -4,11 +4,10 @@ import { cwd } from 'process';
 
 // types
 import type { MDXRemoteSerializeResult } from 'next-mdx-remote';
+import type { MarkdownFolders } from '@/types/markdownFrontmatter';
 
 // utils
 import readMarkdown from './readMarkdown';
-
-export type Folder = 'blogs' | 'projects';
 
 export interface MarkdownItemWithFrontMatter {
   frontmatter?: MDXRemoteSerializeResult['frontmatter'];
@@ -18,10 +17,14 @@ export interface MarkdownItemWithFrontMatter {
 export type ListMarkdownsResult = string[] | MarkdownItemWithFrontMatter[];
 
 /** Reads markdown directory and returns markdown file names and their content */
-const listMarkdowns = async (folder: Folder): Promise<string[]> => {
+const listMarkdowns = async ({
+  folder
+}: {
+  folder: MarkdownFolders;
+}): Promise<string[]> => {
   try {
     const path = resolve(cwd() + `/markdown/${folder}`);
-    const files = readdirSync(path);
+    const files = readdirSync(path).map((i) => i.replace('.md', ''));
 
     return files;
   } catch (err) {
@@ -31,13 +34,16 @@ const listMarkdowns = async (folder: Folder): Promise<string[]> => {
 };
 
 /** Parses markdown file's front matter */
-export const readMarkdownListFrontMatter = async (
-  arr: string[],
-  folder: Folder
-) => {
+export const readMarkdownListFrontMatter = async ({
+  arr,
+  folder
+}: {
+  arr: string[];
+  folder: MarkdownFolders;
+}) => {
   const filesWithFrontMatter: MarkdownItemWithFrontMatter[] = [];
   for (let i = 0; i < arr.length; i++) {
-    const filename = arr[i].replace('.md', '');
+    const filename = arr[i];
 
     try {
       const { frontmatter } = await readMarkdown({ filename, folder });
