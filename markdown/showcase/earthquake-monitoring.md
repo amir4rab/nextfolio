@@ -13,15 +13,15 @@ scores:
       lgp: 1.1
       tti: 3.3
       tbt: 340
-      cls: 0
+      cls: 0.0
     desktop:
       score: 100
       fcp: 0.3
       si: 0.7
       lgp: 0.3
       tti: 1.0
-      tbt: 0
-      cls: 0
+      tbt: 0.0
+      cls: 0.0
 images:
   ratios:
     mobile: '1284/2778'
@@ -43,6 +43,9 @@ mainTechnologies:
   - docker
   - nginx
   - prisma
+  - postgres
+  - redis
+  - pwa
 ---
 
 ## TLDR
