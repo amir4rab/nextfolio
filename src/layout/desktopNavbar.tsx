@@ -288,9 +288,10 @@ const DesktopNavbar = ({ children, desktopMaxWidth, socials }: NavbarProps) => {
 
 interface ItemProps extends LinkProps {
   children?: ReactNode;
+  active?: boolean;
 }
 
-const Item = ({ children, ...props }: ItemProps) => {
+const Item = ({ children, active = false, ...props }: ItemProps) => {
   const { onHover } = useContext(NavbarContext);
   const { classes, cx } = useStyles(0);
   const { pathname } = useRouter();
@@ -301,7 +302,7 @@ const Item = ({ children, ...props }: ItemProps) => {
         onMouseEnter={onHover}
         className={cx(
           classes.item,
-          props.href === pathname && classes.activeItem
+          (props.href === pathname || active) && classes.activeItem
         )}>
         {children}
       </a>

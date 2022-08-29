@@ -6,7 +6,7 @@ import { ReactNode, useRef } from 'react';
 import { MDXRemote } from 'next-mdx-remote';
 
 // mantine
-import { createStyles, useMantineTheme } from '@mantine/styles';
+import { createStyles } from '@mantine/styles';
 import { TypographyStylesProvider } from '@mantine/core';
 import { useClipboard } from '@mantine/hooks';
 
@@ -77,14 +77,9 @@ interface props {
 }
 
 const MarkdownWrapper = ({ mdxContent, animate }: props) => {
-  const t = useMantineTheme();
-
   if (typeof animate === 'undefined')
     return (
-      <TypographyStylesProvider
-        sx={{
-          color: t.colorScheme === 'dark' ? t.colors.gray[5] : t.colors.dark[7]
-        }}>
+      <TypographyStylesProvider>
         <MDXRemote {...mdxContent} lazy components={{ code: Code }} />
       </TypographyStylesProvider>
     );
@@ -93,10 +88,7 @@ const MarkdownWrapper = ({ mdxContent, animate }: props) => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: { delay: animate.delay } }}>
-      <TypographyStylesProvider
-        sx={{
-          color: t.colorScheme === 'dark' ? t.colors.gray[5] : t.colors.dark[7]
-        }}>
+      <TypographyStylesProvider>
         <MDXRemote {...mdxContent} lazy components={{ code: Code }} />
       </TypographyStylesProvider>
     </motion.div>

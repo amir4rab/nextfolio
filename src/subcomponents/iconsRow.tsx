@@ -13,8 +13,10 @@ import {
 } from '@mantine/styles';
 
 export interface IconsRowProps {
+  stopOnHover?: boolean;
   title?: string;
   linker?: boolean;
+  sidePadding?: number;
   icons: {
     icon: IconType;
     href: string;
@@ -52,7 +54,7 @@ const useStyles = createStyles((t) => ({
     width: '100%'
   },
   icon: {
-    left: '-2.5rem',
+    left: '-3.125rem',
     width: '2.5rem',
     height: '2.5rem',
     top: '50%',
@@ -71,7 +73,6 @@ const useStyles = createStyles((t) => ({
       opacity: 1,
       color: t.primaryColor
     }
-    // animation: `${slidingAnimation} linear forwards infinite`,
   },
   iconPaused: {
     animationPlayState: 'paused !important'
@@ -82,11 +83,12 @@ const useStyles = createStyles((t) => ({
 const getTiming = (
   arrayLength: number,
   wrapperWidth: number,
-  isDesktop: boolean
+  isDesktop: boolean,
+  sidePadding: number
 ) => {
   const animationDuration = isDesktop ? 20 : 10;
   const elementWidth = 40; // 2.5rem * 16 = 40px
-  const wrapperWidthWithPadding = wrapperWidth + 80;
+  const wrapperWidthWithPadding = wrapperWidth + sidePadding * 2 * 16;
   const speed = wrapperWidthWithPadding / animationDuration; // path / duration of path
 
   const emptySpace = wrapperWidthWithPadding - elementWidth * arrayLength;
@@ -141,7 +143,9 @@ const IconWrapper = ({
 const IconsRow = ({
   icons,
   title = 'Experienced with',
-  linker = false
+  linker = false,
+  stopOnHover = true,
+  sidePadding = 3.125
 }: IconsRowProps) => {
   const { classes, cx } = useStyles();
   const [hovered, setHovered] = useState(false);
@@ -156,7 +160,7 @@ const IconsRow = ({
     const width = wrapperRef.current.getBoundingClientRect().width;
     wrapperWidth.current = width;
 
-    const delay = getTiming(icons.length, width, isDesktop);
+    const delay = getTiming(icons.length, width, isDesktop, sidePadding);
 
     setDelayLength(delay);
   }, [icons.length]);
@@ -177,7 +181,7 @@ const IconsRow = ({
     <div ref={wrapperRef} className={classes.iconsRow}>
       <p className={classes.title}>{title}</p>
       <div
-        onMouseEnter={() => setHovered(true)}
+        onMouseEnter={() => stopOnHover && setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         className={classes.iconsWrapper}>
         {delayLength !== null &&
@@ -186,10 +190,10 @@ const IconsRow = ({
 
             const slidingAnimation = keyframes({
               '0%': {
-                transform: 'translate(-2.5rem, -50%)'
+                transform: `translate(-${sidePadding}rem, -50%)`
               },
               '100%': {
-                transform: `translate(calc( ${wrapperWidth.current}px + 2.5rem), -50%)`
+                transform: `translate(calc( ${wrapperWidth.current}px + ${sidePadding}rem), -50%)`
               }
             });
 

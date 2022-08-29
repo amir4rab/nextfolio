@@ -3,12 +3,14 @@ import type { ReactNode } from 'react';
 
 // next
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 
 // mantine
 import { createStyles } from '@mantine/styles';
 
 // components
 import DesktopNavbar from './desktopNavbar';
+
 const AuroraBackground = dynamic(() => import('./auroraBackground'), {
   suspense: true
 });
@@ -34,6 +36,7 @@ interface Props {
 
 const Layout = ({ children }: Props) => {
   const { classes } = useStyles();
+  const { pathname } = useRouter();
 
   return (
     <>
@@ -46,6 +49,11 @@ const Layout = ({ children }: Props) => {
         }}>
         <DesktopNavbar.Item href='/'>Home</DesktopNavbar.Item>
         <DesktopNavbar.Item href='/about'>About</DesktopNavbar.Item>
+        <DesktopNavbar.Item
+          active={pathname.includes('showcase')}
+          href='/#showcase'>
+          showcase
+        </DesktopNavbar.Item>
         <DesktopNavbar.Item href='/projects'>Projects</DesktopNavbar.Item>
         <DesktopNavbar.Item href='/blog'>Blog</DesktopNavbar.Item>
       </DesktopNavbar>

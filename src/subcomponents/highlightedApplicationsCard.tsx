@@ -229,7 +229,7 @@ const HighlightedApplicationsCard = () => {
   return (
     <div className={classes.highlightedApplicationsCard}>
       <div className={classes.side}>
-        <h3>Some of my highlighted projects</h3>
+        <h3 id='showcase'>Some of my highlighted projects</h3>
         <div className={classes.controls}>
           {applications.map(({ icon, id, name }, i) => (
             <button
