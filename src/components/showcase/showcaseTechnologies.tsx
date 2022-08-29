@@ -15,7 +15,11 @@ import {
   SiNginx,
   SiPrisma,
   SiDocker,
-  SiGithub
+  SiGithub,
+  SiPwa,
+  SiRedis,
+  SiPostgresql,
+  SiElectron
 } from 'react-icons/si';
 import { IconType } from 'react-icons';
 const supportedIcons = {
@@ -26,7 +30,11 @@ const supportedIcons = {
   nginx: SiNginx,
   prisma: SiPrisma,
   docker: SiDocker,
-  github: SiGithub
+  github: SiGithub,
+  pwa: SiPwa,
+  redis: SiRedis,
+  postgresql: SiPostgresql,
+  electron: SiElectron
 };
 
 interface Props {
@@ -59,7 +67,12 @@ const ShowcaseTechnologies = ({ technologies, delay = 0 }: Props) => {
     <motion.div
       animate={{ opacity: 1, transition: { delay } }}
       initial={{ opacity: 0 }}>
-      <IconsRow title='Projects technologies' icons={icons} />
+      <IconsRow
+        stopOnHover={false}
+        title='Projects technologies'
+        icons={icons}
+        sidePadding={icons.length * 0.75}
+      />
     </motion.div>
   );
 };

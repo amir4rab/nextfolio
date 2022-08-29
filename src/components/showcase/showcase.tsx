@@ -34,7 +34,8 @@ const ShowcaseTechnologies = dynamic(() => import('./showcaseTechnologies'), {
 // styles
 const useStyles = createStyles((t) => ({
   article: {
-    padding: '10vh 0'
+    padding: '10vh 0',
+    minHeight: '120vh'
   },
   header: {
     display: 'flex',
