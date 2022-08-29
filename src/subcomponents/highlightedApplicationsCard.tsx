@@ -8,6 +8,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 // components
 import Button from './button';
+import Link from 'next/link';
 
 // data
 interface Application {
@@ -196,7 +197,11 @@ const InnerCard = ({ application }: { application: Application }) => {
         <div className={classes.cardDetails}>
           <p className={classes.cardTitle}>{name}</p>
           <p>{description}</p>
-          <Button sx={(t) => ({ fontSize: t.fontSizes.xs })}>Read more</Button>
+          <Link href={`/showcase/${id}`} passHref>
+            <Button component='a' sx={(t) => ({ fontSize: t.fontSizes.xs })}>
+              Read more
+            </Button>
+          </Link>
         </div>
       </motion.div>
       <motion.div

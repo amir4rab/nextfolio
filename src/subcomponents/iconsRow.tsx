@@ -13,6 +13,8 @@ import {
 } from '@mantine/styles';
 
 export interface IconsRowProps {
+  title?: string;
+  linker?: boolean;
   icons: {
     icon: IconType;
     href: string;
@@ -109,7 +111,7 @@ const useIconStyles = createStyles((t, styles?: CSSObject) => ({
 }));
 
 interface IconWrapperProps {
-  href: string;
+  href?: string;
   key?: string | number;
   className: string;
   children: ReactNode;
@@ -136,7 +138,11 @@ const IconWrapper = ({
   );
 };
 
-const IconsRow = ({ icons }: IconsRowProps) => {
+const IconsRow = ({
+  icons,
+  title = 'Experienced with',
+  linker = false
+}: IconsRowProps) => {
   const { classes, cx } = useStyles();
   const [hovered, setHovered] = useState(false);
   const [delayLength, setDelayLength] = useState<null | number>(null);
@@ -169,7 +175,7 @@ const IconsRow = ({ icons }: IconsRowProps) => {
 
   return (
     <div ref={wrapperRef} className={classes.iconsRow}>
-      <p className={classes.title}>Experienced with:</p>
+      <p className={classes.title}>{title}</p>
       <div
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
@@ -189,7 +195,7 @@ const IconsRow = ({ icons }: IconsRowProps) => {
 
             return (
               <IconWrapper
-                href={href}
+                href={linker ? href : undefined}
                 key={i}
                 styles={() => ({
                   animation: `${slidingAnimation} linear forwards infinite`,

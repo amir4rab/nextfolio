@@ -33,6 +33,10 @@ export interface ShowcaseProjectFrontmatter {
     };
   };
   images: {
+    ratios: {
+      mobile: string;
+      desktop: string;
+    };
     mobile: string[];
     desktop: string[];
   };

@@ -20,11 +20,17 @@ import Button from './button';
 const useStyles = createStyles((t) => ({
   codeWrapper: {
     position: 'relative',
-    boxShadow: t.shadows.md
+    boxShadow: t.shadows.md,
+    maxWidth: '100%'
+  },
+  codeWrapperInner: {
+    padding: '2rem',
+    maxWidth: '100%',
+    overflow: 'auto'
   },
   copyButton: {
-    top: '0',
-    right: '0',
+    top: '1rem',
+    right: '1rem',
     position: 'absolute',
     fontSize: t.fontSizes.xs,
     opacity: 0.75,
@@ -56,7 +62,9 @@ const Code = ({ children }: { children?: ReactNode }) => {
         data-copied={copied ? true : undefined}>
         {copied ? 'Copied' : 'Copy'}
       </Button>
-      <div ref={codeWrapperRef}>{children}</div>
+      <div className={classes.codeWrapperInner} ref={codeWrapperRef}>
+        {children}
+      </div>
     </div>
   );
 };
