@@ -23,6 +23,10 @@ scores:
       tbt: 20
       cls: 0.03
 images:
+  banner:
+    aspectRatio: '2420/2160'
+    url: '/assets/highlighted/sf-banner.png'
+  icon: '/assets/highlighted/sf-icon.png'
   ratios:
     mobile: '1284/2778'
     desktop: '1920/1080'
@@ -43,6 +47,10 @@ mainTechnologies:
   - nginx
   - electron
   - pwa
+shortInfo: 'An experimental website to take WebCrypto API and IndexDB API to their limits!'
+background:
+  muted: 'linear-gradient(66.59deg, #16B4B410 0%, rgba(22, 180, 180, 0) 100%), linear-gradient(113.97deg, #1C7ED610 0%, rgba(28, 126, 214, 0) 100.83%)'
+  colorful: 'linear-gradient(66.59deg, rgba(250, 255, 0, 0.75) 0%, rgba(250, 255, 0, 0) 100%), linear-gradient(113.41deg, rgba(112, 0, 255, 0.75) 0%, rgba(112, 0, 255, 0) 100%), linear-gradient(293.41deg, rgba(0, 255, 194, 0.75) 0%, rgba(112, 0, 255, 0) 100%, rgba(0, 255, 194, 0) 100%), linear-gradient(246.59deg, rgba(0, 117, 255, 0.75) 0%, rgba(112, 0, 255, 0) 100%), #FFFFFF'
 ---
 
 ## Experiment to its max extend

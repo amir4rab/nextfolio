@@ -23,12 +23,18 @@ scores:
       tbt: 0.0
       cls: 0.0
 images:
+  banner:
+    aspectRatio: '2420/2160'
+    url: '/assets/highlighted/em-banner.png'
+  icon: '/assets/highlighted/em-icon.png'
   ratios:
     mobile: '1284/2778'
     desktop: '1920/1080'
   mobile:
     - '/assets/highlighted/em-m-0.png'
     - '/assets/highlighted/em-m-1.png'
+    - '/assets/highlighted/sf-m-0.png'
+    - '/assets/highlighted/sf-m-1.png'
   desktop:
     - '/assets/highlighted/em-d-0.png'
     - '/assets/highlighted/em-d-1.png'
@@ -46,6 +52,10 @@ mainTechnologies:
   - postgres
   - redis
   - pwa
+shortInfo: 'My final project for my bachelor degree.'
+background:
+  muted: 'linear-gradient(66.59deg, #164CB410 0%, rgba(22, 118, 180, 0) 100%), linear-gradient(113.97deg, #1C7ED610 0%, rgba(28, 126, 214, 0) 100.83%)'
+  colorful: 'linear-gradient(66.59deg, rgba(165, 23, 188, 0.75) 0%, rgba(23, 100, 188, 0) 100%), linear-gradient(113.41deg, rgba(1, 118, 255, 0.75) 0%, rgba(23, 100, 188, 0) 100%), linear-gradient(293.41deg, rgba(0, 255, 71, 0.75) 0%, rgba(0, 255, 71, 0) 100%), linear-gradient(246.59deg, rgba(0, 255, 240, 0.75) 0%, rgba(0, 255, 240, 0) 100%), #FFFFFF'
 ---
 
 ## TLDR
