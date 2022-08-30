@@ -57,6 +57,17 @@ const useStyles = createStyles((t) => ({
       opacity: 0.75
     }
   },
+  mobileImgWrapper: {
+    width: '30vw',
+    overflow: 'hidden',
+    display: 'flex',
+    justifyContent: 'center',
+    alignContent: 'center',
+    ['& *']: {
+      // width: '100% !important',
+      maxWidth: '100% !important'
+    }
+  },
   activeButton: {
     opacity: 1,
     color: t.primaryColor,
@@ -142,7 +153,7 @@ const ShowcaseCarousel = ({ title, data, delay = 0 }: Props) => {
         <AnimatePresence mode='wait' initial>
           {imgType === 'desktop' ? (
             <motion.div
-              key='mobile'
+              key='desktop'
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               initial={{ opacity: 0 }}>
@@ -171,7 +182,7 @@ const ShowcaseCarousel = ({ title, data, delay = 0 }: Props) => {
             </motion.div>
           ) : (
             <motion.div
-              key='desktop'
+              key='mobile'
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               initial={{ opacity: 0 }}>
@@ -179,7 +190,6 @@ const ShowcaseCarousel = ({ title, data, delay = 0 }: Props) => {
                 classNames={cClasses}
                 slideGap='md'
                 controlsOffset='xs'
-                loop
                 withIndicators
                 sx={{ width: '100%' }}
                 mx='auto'>
@@ -187,13 +197,15 @@ const ShowcaseCarousel = ({ title, data, delay = 0 }: Props) => {
                   <MantineCarousel.Slide
                     sx={{ display: 'flex', justifyContent: 'center' }}
                     key={i}>
-                    <img
-                      className={classes.img}
-                      src={i}
-                      alt=''
-                      loading='lazy'
-                      style={{ aspectRatio: data.ratios['mobile'] }}
-                    />
+                    <div className={classes.mobileImgWrapper}>
+                      <img
+                        className={classes.img}
+                        src={i}
+                        alt=''
+                        loading='lazy'
+                        style={{ aspectRatio: data.ratios['mobile'] }}
+                      />
+                    </div>
                   </MantineCarousel.Slide>
                 ))}
               </MantineCarousel>
