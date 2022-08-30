@@ -13,7 +13,6 @@ export type MarkdownFolders = 'blogs' | 'projects' | 'showcase';
 type Technologies =
   | 'next'
   | 'react'
-  | 'i18n'
   | 'framer'
   | 'vite'
   | 'docker'

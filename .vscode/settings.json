@@ -11,5 +11,8 @@
     "markdown-media": "images",
     "highlighted": "images",
     "backgrounds": "images"
+  },
+  "material-icon-theme.files.associations": {
+    "TODO.md": "todo"
   }
 }
