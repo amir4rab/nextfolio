@@ -14,11 +14,22 @@ type Technologies =
   | 'next'
   | 'react'
   | 'i18n'
-  | 'framer-motion'
+  | 'framer'
   | 'vite'
   | 'docker'
   | 'nginx'
-  | 'prisma';
+  | 'prisma'
+  | 'web3'
+  | 'node'
+  | 'webRTC'
+  | 'mongodb'
+  | 'socket'
+  | 'mongo'
+  | 'pwa'
+  | 'postgres'
+  | 'redis'
+  | 'electron'
+  | 'typescript';
 
 export interface ShowcaseProjectFrontmatter {
   id: string;
@@ -33,15 +44,40 @@ export interface ShowcaseProjectFrontmatter {
     };
   };
   images: {
+    icon: string;
+    mobile: string[];
+    desktop: string[];
+    banner: {
+      aspectRatio: string;
+      url: string;
+    };
     ratios: {
       mobile: string;
       desktop: string;
     };
-    mobile: string[];
-    desktop: string[];
   };
-  website: 'string';
-  github: 'string';
-  license: 'string';
+  website: string;
+  github: string;
+  license: string;
+  shortInfo: string;
+  background: {
+    muted: string;
+    colorful: string;
+  };
+  mainTechnologies: Technologies[];
+}
+
+export interface ProjectFrontmatter {
+  id: string;
+  name: string;
+  website: null | string;
+  github: null | string;
+  npmPackage: null | string;
+  thumbnail: {
+    url: string;
+    ratio: string;
+  } | null;
+  shortInfo: string;
+  tags: string[];
   mainTechnologies: Technologies[];
 }

@@ -4,7 +4,8 @@ import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 
 // types
-import { GetGhResult } from '@/utils/backend/getGh';
+import type { GetGhResult } from '@/utils/backend/getGh';
+import type { ShowcaseProjectFrontmatter } from '@/types/markdownFrontmatter';
 
 // components
 import HomeCard from '@/subcomponents/homeCard';
@@ -45,9 +46,10 @@ const iconsArray = [
 
 interface Props {
   ghData: GetGhResult;
+  showcases: ShowcaseProjectFrontmatter[];
 }
 
-const Home = ({ ghData }: Props) => {
+const Home = ({ ghData, showcases }: Props) => {
   return (
     <>
       <header>
@@ -57,12 +59,11 @@ const Home = ({ ghData }: Props) => {
         <IconsRow icons={iconsArray} />
       </Suspense>
       <Suspense>
-        <HighlightedApplicationsCard />
+        <HighlightedApplicationsCard applications={showcases} />
       </Suspense>
       <Suspense>
         <GhDisplay ghData={ghData} />
       </Suspense>
-      <div style={{ height: '500vh' }} />
     </>
   );
 };

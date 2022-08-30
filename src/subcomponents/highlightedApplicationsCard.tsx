@@ -10,37 +10,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Button from './button';
 import Link from 'next/link';
 
-// data
-interface Application {
-  website: string;
-  name: string;
-  icon: string;
-  banner: string;
-  id: string;
-  bg: string;
-  description: string;
-}
-const applications: Application[] = [
-  {
-    id: 'secure-file',
-    banner: '/assets/highlighted/sf-banner.png',
-    icon: '/assets/highlighted/sf-icon.png',
-    name: 'Secure file',
-    website: 'https://secure-file.amir4rab.com',
-    description:
-      'An experimental website to take WebCrypto API and IndexDB API to their limits!',
-    bg: 'linear-gradient(66.59deg, #16B4B410 0%, rgba(22, 180, 180, 0) 100%), linear-gradient(113.97deg, #1C7ED610 0%, rgba(28, 126, 214, 0) 100.83%)'
-  },
-  {
-    id: 'earthquake-monitoring',
-    banner: '/assets/highlighted/em-banner.png',
-    icon: '/assets/highlighted/em-icon.png',
-    name: 'Earthquake monitoring',
-    website: 'https://earthquake-monitoring.amir4rab.com',
-    description: 'My final project for my bachelor degree.',
-    bg: 'linear-gradient(66.59deg, #164CB410 0%, rgba(22, 118, 180, 0) 100%), linear-gradient(113.97deg, #1C7ED610 0%, rgba(28, 126, 214, 0) 100.83%)'
-  }
-];
+// types
+import type { ShowcaseProjectFrontmatter } from '@/types/markdownFrontmatter';
 
 // keyframes
 const animateIn = keyframes({
@@ -182,8 +153,15 @@ const useStyles = createStyles((t) => ({
   }
 }));
 
-const InnerCard = ({ application }: { application: Application }) => {
-  const { id, name, description, banner, bg } = application;
+const InnerCard = ({
+  application
+}: {
+  application: ShowcaseProjectFrontmatter;
+}) => {
+  const { id, name, shortInfo, images, background } = application;
+  const { banner } = images;
+  const { muted } = background;
+
   const { classes } = useStyles();
 
   return (
@@ -196,7 +174,7 @@ const InnerCard = ({ application }: { application: Application }) => {
         key={id}>
         <div className={classes.cardDetails}>
           <p className={classes.cardTitle}>{name}</p>
-          <p>{description}</p>
+          <p>{shortInfo}</p>
           <Link href={`/showcase/${id}`} passHref>
             <Button component='a' sx={(t) => ({ fontSize: t.fontSizes.xs })}>
               Read more
@@ -209,11 +187,12 @@ const InnerCard = ({ application }: { application: Application }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        style={{ background: bg }}
+        style={{ background: muted }}
         key={id + '-banner'}>
         <img
           className={classes.cardBanner}
-          src={banner}
+          src={banner.url}
+          style={{ aspectRatio: banner.aspectRatio }}
           loading='lazy'
           alt={name + ' banner'}
         />
@@ -222,7 +201,11 @@ const InnerCard = ({ application }: { application: Application }) => {
   );
 };
 
-const HighlightedApplicationsCard = () => {
+interface Props {
+  applications: ShowcaseProjectFrontmatter[];
+}
+
+const HighlightedApplicationsCard = ({ applications }: Props) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const { classes } = useStyles();
 
@@ -231,12 +214,12 @@ const HighlightedApplicationsCard = () => {
       <div className={classes.side}>
         <h3 id='showcase'>Some of my highlighted projects</h3>
         <div className={classes.controls}>
-          {applications.map(({ icon, id, name }, i) => (
+          {applications.map(({ images, id, name }, i) => (
             <button
               onClick={() => setActiveIndex(i)}
               data-active={i === activeIndex ? true : undefined}
               key={id}>
-              <img src={icon} alt={name + ' icon'} />
+              <img src={images.icon} alt={name + ' icon'} />
             </button>
           ))}
         </div>
