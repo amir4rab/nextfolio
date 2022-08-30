@@ -163,7 +163,7 @@ const IconsRow = ({
     const delay = getTiming(icons.length, width, isDesktop, sidePadding);
 
     setDelayLength(delay);
-  }, [icons.length]);
+  }, [icons.length, sidePadding]);
 
   useEffect(() => {
     if (wrapperRef.current === null || typeof window === 'undefined') return;

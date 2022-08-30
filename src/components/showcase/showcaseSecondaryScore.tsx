@@ -117,20 +117,22 @@ const ScoreRow = ({
 
 interface ShowcaseScoresProps {
   frontmatter: ShowcaseProjectFrontmatter;
+  delay: number;
 }
 
-const ShowcaseSecondaryScore = ({ frontmatter }: ShowcaseScoresProps) => {
-  const initialDelay = Object.keys(frontmatter.scores).length * 0.7;
-
+const ShowcaseSecondaryScore = ({
+  frontmatter,
+  delay
+}: ShowcaseScoresProps) => {
   return (
     <div>
       <ScoreRow
-        initialDelay={initialDelay}
+        initialDelay={delay}
         scores={frontmatter.scores.performance.mobile}
         title='Mobile Performance Statics'
       />
       <ScoreRow
-        initialDelay={initialDelay}
+        initialDelay={delay}
         scores={frontmatter.scores.performance.desktop}
         title='Desktop Performance Statics'
       />

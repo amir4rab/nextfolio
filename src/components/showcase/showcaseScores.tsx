@@ -69,7 +69,7 @@ const ScoreItem = ({
 }) => {
   const { primaryColor, colors } = useMantineTheme();
   const { classes } = useStyles();
-  const delayAmount = count * 0.5;
+  const delayAmount = count * 0.25;
 
   return (
     <div className={classes.scoreWrapper}>
@@ -108,12 +108,12 @@ const ScoreItem = ({
                   opacity: 1,
                   transition: {
                     pathLength: {
-                      delay: delayAmount * 1.25,
+                      delay: delayAmount,
                       type: 'spring',
-                      duration: 0.3,
+                      duration: 0.5,
                       bounce: 0
                     },
-                    opacity: { delay: delayAmount * 1.25, duration: 0.01 }
+                    opacity: { delay: delayAmount, duration: 0.01 }
                   }
                 };
               }

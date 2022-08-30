@@ -24,7 +24,7 @@ const MarkdownWrapper = dynamic(
   () => import('@/subcomponents/markdownWrapper'),
   { suspense: true }
 );
-const ShowcaseCarousel = dynamic(() => import('./showCarousel'), {
+const ShowcaseCarousel = dynamic(() => import('./showcaseCarousel'), {
   suspense: true
 });
 const ShowcaseTechnologies = dynamic(() => import('./showcaseTechnologies'), {
@@ -97,23 +97,26 @@ const Showcase = ({ mdxContent, frontmatterData }: ShowcaseProps) => {
       </Suspense>
       <Suspense>
         <ShowcaseTechnologies
-          delay={Object.keys(scores).length * 0.7}
+          delay={Object.keys(scores).length * 0.3}
           technologies={frontmatterData.mainTechnologies}
         />
       </Suspense>
       <Suspense fallback={null}>
-        <ShowcaseSecondaryScore frontmatter={frontmatterData} />
+        <ShowcaseSecondaryScore
+          delay={Object.keys(scores).length * 0.3}
+          frontmatter={frontmatterData}
+        />
       </Suspense>
       <Suspense>
         <ShowcaseCarousel
           data={frontmatterData.images}
           title='Screen shots'
-          delay={Object.keys(scores).length * 0.7}
+          delay={Object.keys(scores).length * 0.3}
         />
       </Suspense>
       <Suspense fallback={null}>
         <MarkdownWrapper
-          animate={{ delay: Object.keys(scores).length * 0.7 }}
+          animate={{ delay: Object.keys(scores).length * 0.3 }}
           mdxContent={mdxContent}
         />
       </Suspense>
