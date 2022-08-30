@@ -143,7 +143,7 @@ const IconWrapper = ({
 const IconsRow = ({
   icons,
   title = 'Experienced with',
-  linker = false,
+  linker = true,
   stopOnHover = true,
   sidePadding = 3.125
 }: IconsRowProps) => {

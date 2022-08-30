@@ -6,6 +6,9 @@ import { motion } from 'framer-motion';
 // components
 import IconsRow, { IconsRowProps } from '@/subcomponents/iconsRow';
 
+// types
+import type { IconType } from 'react-icons';
+
 // icons
 import {
   SiNextdotjs,
@@ -19,9 +22,14 @@ import {
   SiPwa,
   SiRedis,
   SiPostgresql,
-  SiElectron
+  SiElectron,
+  SiWeb3Dotjs,
+  SiNodedotjs,
+  SiWebrtc,
+  SiSocketdotio,
+  SiMongodb,
+  SiTypescript
 } from 'react-icons/si';
-import { IconType } from 'react-icons';
 const supportedIcons = {
   next: SiNextdotjs,
   react: SiReact,
@@ -34,7 +42,13 @@ const supportedIcons = {
   pwa: SiPwa,
   redis: SiRedis,
   postgresql: SiPostgresql,
-  electron: SiElectron
+  electron: SiElectron,
+  web3: SiWeb3Dotjs,
+  node: SiNodedotjs,
+  webRTC: SiWebrtc,
+  socket: SiSocketdotio,
+  mongo: SiMongodb,
+  typescript: SiTypescript
 };
 
 interface Props {
@@ -42,7 +56,7 @@ interface Props {
   technologies: string[];
 }
 
-const ShowcaseTechnologies = ({ technologies, delay = 0 }: Props) => {
+const TechnologiesRow = ({ technologies, delay = 0 }: Props) => {
   const icons: IconsRowProps['icons'] = useMemo(() => {
     const iconsWithUndefined = technologies.map((i) => {
       if (Object.prototype.hasOwnProperty.call(supportedIcons, i)) {
@@ -68,6 +82,7 @@ const ShowcaseTechnologies = ({ technologies, delay = 0 }: Props) => {
       animate={{ opacity: 1, transition: { delay } }}
       initial={{ opacity: 0 }}>
       <IconsRow
+        linker={false}
         stopOnHover={false}
         title='Projects technologies'
         icons={icons}
@@ -77,4 +92,4 @@ const ShowcaseTechnologies = ({ technologies, delay = 0 }: Props) => {
   );
 };
 
-export default ShowcaseTechnologies;
+export default TechnologiesRow;

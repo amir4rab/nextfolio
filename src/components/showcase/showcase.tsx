@@ -27,9 +27,12 @@ const MarkdownWrapper = dynamic(
 const ShowcaseCarousel = dynamic(() => import('./showcaseCarousel'), {
   suspense: true
 });
-const ShowcaseTechnologies = dynamic(() => import('./showcaseTechnologies'), {
-  suspense: true
-});
+const ShowcaseTechnologies = dynamic(
+  () => import('@/subcomponents/technologiesRow'),
+  {
+    suspense: true
+  }
+);
 
 // styles
 const useStyles = createStyles((t) => ({
