@@ -4,7 +4,11 @@ import { cwd } from 'process';
 
 // types
 import type { MDXRemoteSerializeResult } from 'next-mdx-remote';
-import type { MarkdownFolders } from '@/types/markdownFrontmatter';
+import type {
+  MarkdownFolders,
+  ProjectFrontmatter,
+  ShowcaseProjectFrontmatter
+} from '@/types/markdownFrontmatter';
 
 // utils
 import readMarkdown from './readMarkdown';
@@ -41,22 +45,24 @@ export const readMarkdownListFrontMatter = async ({
   arr: string[];
   folder: MarkdownFolders;
 }) => {
-  const filesWithFrontMatter: MarkdownItemWithFrontMatter[] = [];
+  const filesWithFrontMatter = [];
   for (let i = 0; i < arr.length; i++) {
     const filename = arr[i];
 
     try {
       const { frontmatter } = await readMarkdown({ filename, folder });
-      filesWithFrontMatter.push({
-        filename,
-        frontmatter
-      });
+      filesWithFrontMatter.push(frontmatter);
     } catch (err) {
       console.error(`Failed to read following file: ${filename}: `, err);
     }
   }
 
-  return filesWithFrontMatter;
+  if (folder === 'showcase')
+    return filesWithFrontMatter as unknown as ShowcaseProjectFrontmatter[];
+  if (folder === 'projects')
+    return filesWithFrontMatter as unknown as ProjectFrontmatter[];
+
+  return filesWithFrontMatter as unknown as string[];
 };
 
 export default listMarkdowns;
