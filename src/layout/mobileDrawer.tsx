@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 
 // next
@@ -11,10 +11,18 @@ import { createStyles, keyframes } from '@mantine/styles';
 import { useRouter } from 'next/router';
 
 // framer-motion
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, usePresence } from 'framer-motion';
 
 // components
 import Button from '@/subcomponents/button';
+
+// types
+interface Link {
+  href: string;
+  name: string;
+  isActive?: boolean;
+}
+type Links = Link[];
 
 // keyframes
 const animateInDrawer = keyframes({
@@ -81,24 +89,42 @@ const useStyles = createStyles((t) => ({
   }
 }));
 
+const Drawer = ({ links, onClose }: { links: Links; onClose: () => void }) => {
+  const { pathname } = useRouter();
+  const { classes } = useStyles();
+  const [isPresent] = usePresence();
+
+  return (
+    <div
+      data-visible={isPresent ? true : undefined}
+      data-hidden={!isPresent ? true : undefined}
+      className={classes.drawer}>
+      {links.map(({ href, isActive, name }) => (
+        <Link key={href} href={href} passHref>
+          <Button
+            className={classes.navButton}
+            data-active={
+              isActive ? isActive : pathname === href ? true : undefined
+            }
+            component='a'
+            onClick={onClose}>
+            {name}
+          </Button>
+        </Link>
+      ))}
+    </div>
+  );
+};
+
 interface Props {
   onClose: () => void;
   status: boolean;
-  links: {
-    href: string;
-    name: string;
-    isActive?: boolean;
-  }[];
+  links: Links;
 }
-const MobileDrawer = ({ onClose, status, links = [] }: Props) => {
-  const { pathname } = useRouter();
-  const { classes } = useStyles();
-  const [drawer, setDrawer] = useState<boolean>(false);
-  const closingTimeout = useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
-    if (status) setDrawer(status);
-  }, [status]);
+const MobileDrawer = ({ onClose, status, links = [] }: Props) => {
+  const { classes } = useStyles();
+  const closingTimeout = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const timeout = closingTimeout.current;
@@ -106,18 +132,6 @@ const MobileDrawer = ({ onClose, status, links = [] }: Props) => {
       timeout !== null && clearTimeout(timeout);
     };
   }, []);
-
-  const onWrapperClick = (ev: React.MouseEvent<HTMLDivElement>) => {
-    if ((ev.target as HTMLElement).id === 'mobileDrawerWrapper') {
-      setDrawer(false);
-      closingTimeout.current = setTimeout(() => onClose(), 100);
-    }
-  };
-
-  const onNavigation = () => {
-    setDrawer(false);
-    closingTimeout.current = setTimeout(() => onClose(), 100);
-  };
 
   return (
     <AnimatePresence>
@@ -127,26 +141,9 @@ const MobileDrawer = ({ onClose, status, links = [] }: Props) => {
           initial={{ opacity: 0 }}
           exit={{ opacity: 0, transition: { duration: 0.1, delay: 0.1 } }}
           id='mobileDrawerWrapper'
-          onClick={onWrapperClick}
+          onClick={onClose}
           className={classes.wrapper}>
-          <div
-            data-visible={drawer ? true : undefined}
-            data-hidden={!drawer ? true : undefined}
-            className={classes.drawer}>
-            {links.map(({ href, isActive, name }) => (
-              <Link key={href} href={href} passHref>
-                <Button
-                  className={classes.navButton}
-                  data-active={
-                    isActive ? isActive : pathname === href ? true : undefined
-                  }
-                  component='a'
-                  onClick={onNavigation}>
-                  {name}
-                </Button>
-              </Link>
-            ))}
-          </div>
+          <Drawer links={links} onClose={onClose} />
         </motion.div>
       )}
     </AnimatePresence>
