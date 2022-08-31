@@ -4,3 +4,4 @@
 
 - Carousel bug fixes
 - Added showcase projects banner in projects page
+- Added mobile navbar and drawer

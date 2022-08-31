@@ -10,6 +10,7 @@ import { createStyles } from '@mantine/styles';
 
 // components
 import DesktopNavbar from './desktopNavbar';
+import MobileNavbar from './mobileNavbar';
 
 const AuroraBackground = dynamic(() => import('./auroraBackground'), {
   suspense: true
@@ -58,7 +59,8 @@ const Layout = ({ children }: Props) => {
         <DesktopNavbar.Item href='/projects'>Projects</DesktopNavbar.Item>
         <DesktopNavbar.Item href='/blog'>Blog</DesktopNavbar.Item>
       </DesktopNavbar>
-      <Suspense>
+      <MobileNavbar />
+      <Suspense fallback={null}>
         <AuroraBackground />
       </Suspense>
       <main className={classes.main}>{children}</main>

@@ -12,6 +12,7 @@ export default class _Document extends Document {
         <Head />
         <body>
           <Main />
+          <div id='mobileNav' />
           <NextScript />
         </body>
       </Html>
