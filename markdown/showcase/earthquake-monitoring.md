@@ -33,8 +33,6 @@ images:
   mobile:
     - '/assets/highlighted/em-m-0.png'
     - '/assets/highlighted/em-m-1.png'
-    - '/assets/highlighted/sf-m-0.png'
-    - '/assets/highlighted/sf-m-1.png'
   desktop:
     - '/assets/highlighted/em-d-0.png'
     - '/assets/highlighted/em-d-1.png'
