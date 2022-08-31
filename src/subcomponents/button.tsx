@@ -22,7 +22,7 @@ const useStyles = createStyles((t, styles?: CSSObject) => ({
     transition: 'transform .1s ease-in-out, background-color .1s ease-in-out',
     cursor: 'pointer',
     textDecoration: 'none',
-    display: 'inline-box',
+    display: 'inline-block',
     ['&:hover']: {
       transform: 'translate(0, -.05rem)',
       background: t.colors.dark[4]

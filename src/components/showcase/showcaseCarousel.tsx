@@ -1,3 +1,5 @@
+//! Carousel needs to be replaced with my owns implementation !//
+
 import { useState } from 'react';
 
 // mantine
@@ -29,6 +31,8 @@ const useStyles = createStyles((t) => ({
     overflow: 'hidden'
   },
   carousel: {
+    maxWidth: '100%',
+    overflow: 'hidden',
     margin: '5vh 0',
     height: '60vh'
   },
@@ -58,14 +62,14 @@ const useStyles = createStyles((t) => ({
     }
   },
   mobileImgWrapper: {
-    width: '30vw',
-    overflow: 'hidden',
+    height: '40vh',
     display: 'flex',
     justifyContent: 'center',
-    alignContent: 'center',
-    ['& *']: {
-      // width: '100% !important',
-      maxWidth: '100% !important'
+    alignItems: 'center',
+    ['& img']: {
+      maxHeight: '80%',
+      minHeight: '80%',
+      maxWidth: 'none'
     }
   },
   activeButton: {
@@ -162,9 +166,9 @@ const ShowcaseCarousel = ({ title, data, delay = 0 }: Props) => {
                 slideGap='md'
                 controlsOffset='xs'
                 loop
+                mx='auto'
                 withIndicators
-                sx={{ width: '100%' }}
-                mx='auto'>
+                sx={{ width: '100%', maxWidth: '100%' }}>
                 {data['desktop'].map((i) => (
                   <MantineCarousel.Slide
                     sx={{ display: 'flex', justifyContent: 'center' }}
@@ -190,9 +194,10 @@ const ShowcaseCarousel = ({ title, data, delay = 0 }: Props) => {
                 classNames={cClasses}
                 slideGap='md'
                 controlsOffset='xs'
+                loop
+                mx='auto'
                 withIndicators
-                sx={{ width: '100%' }}
-                mx='auto'>
+                sx={{ width: '100%', maxWidth: '100%' }}>
                 {data['mobile'].map((i) => (
                   <MantineCarousel.Slide
                     sx={{ display: 'flex', justifyContent: 'center' }}
