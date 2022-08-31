@@ -61,6 +61,7 @@ const useStyles = createStyles((t) => ({
     display: 'flex',
     flexDirection: 'column',
     boxShadow: t.shadows.md,
+    transform: 'translate(0, 100%)',
     opacity: 0,
     ['&[data-visible]']: {
       animation: `${animateInDrawer} .15s .1s ease-in-out forwards`
