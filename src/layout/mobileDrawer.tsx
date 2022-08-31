@@ -1,7 +1,11 @@
+import { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 
+// next
+import Link from 'next/link';
+
 // mantine
-import { createStyles } from '@mantine/styles';
+import { createStyles, keyframes } from '@mantine/styles';
 
 // next
 import { useRouter } from 'next/router';
@@ -11,7 +15,29 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 // components
 import Button from '@/subcomponents/button';
-import Link from 'next/link';
+
+// keyframes
+const animateInDrawer = keyframes({
+  from: {
+    transform: 'translate(0, 100%)',
+    opacity: 0
+  },
+  to: {
+    transform: 'translate(0, 0%)',
+    opacity: 1
+  }
+});
+
+const animateOutDrawer = keyframes({
+  from: {
+    transform: 'translate(0, 0%)',
+    opacity: 1
+  },
+  to: {
+    transform: 'translate(0, 100%)',
+    opacity: 0
+  }
+});
 
 // styles
 const useStyles = createStyles((t) => ({
@@ -31,11 +57,17 @@ const useStyles = createStyles((t) => ({
     position: 'fixed',
     left: 0,
     bottom: 0,
-    transform: 'translate(0, 0)',
     minHeight: '10vh',
     display: 'flex',
     flexDirection: 'column',
-    boxShadow: t.shadows.md
+    boxShadow: t.shadows.md,
+    opacity: 0,
+    ['&[data-visible]']: {
+      animation: `${animateInDrawer} .15s .1s ease-in-out forwards`
+    },
+    ['&[data-hidden]']: {
+      animation: `${animateOutDrawer} .15s ease-in-out forwards`
+    }
   },
   navButton: {
     ['&:not(:last-of-type)']: {
@@ -60,9 +92,30 @@ interface Props {
 const MobileDrawer = ({ onClose, status, links = [] }: Props) => {
   const { pathname } = useRouter();
   const { classes } = useStyles();
+  const [drawer, setDrawer] = useState<boolean>(false);
+  const closingTimeout = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    if (status) setDrawer(status);
+  }, [status]);
+
+  useEffect(() => {
+    const timeout = closingTimeout.current;
+    return () => {
+      timeout !== null && clearTimeout(timeout);
+    };
+  }, []);
 
   const onWrapperClick = (ev: React.MouseEvent<HTMLDivElement>) => {
-    if ((ev.target as HTMLElement).id === 'mobileDrawerWrapper') onClose();
+    if ((ev.target as HTMLElement).id === 'mobileDrawerWrapper') {
+      setDrawer(false);
+      closingTimeout.current = setTimeout(() => onClose(), 100);
+    }
+  };
+
+  const onNavigation = () => {
+    setDrawer(false);
+    closingTimeout.current = setTimeout(() => onClose(), 100);
   };
 
   return (
@@ -75,25 +128,9 @@ const MobileDrawer = ({ onClose, status, links = [] }: Props) => {
           id='mobileDrawerWrapper'
           onClick={onWrapperClick}
           className={classes.wrapper}>
-          <motion.div
-            transition={{
-              duration: 0.2
-            }}
-            variants={{
-              visible: {
-                transform: 'translate(0%, 1rem)',
-                transition: {
-                  delay: 0.1,
-                  duration: 0.2
-                }
-              },
-              hidden: {
-                transform: 'translate(0%, 100%)'
-              }
-            }}
-            animate={status ? 'visible' : 'hidden'}
-            exit='hidden'
-            initial='hidden'
+          <div
+            data-visible={drawer ? true : undefined}
+            data-hidden={!drawer ? true : undefined}
             className={classes.drawer}>
             {links.map(({ href, isActive, name }) => (
               <Link key={href} href={href} passHref>
@@ -103,12 +140,12 @@ const MobileDrawer = ({ onClose, status, links = [] }: Props) => {
                     isActive ? isActive : pathname === href ? true : undefined
                   }
                   component='a'
-                  onClick={onClose}>
+                  onClick={onNavigation}>
                   {name}
                 </Button>
               </Link>
             ))}
-          </motion.div>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>
