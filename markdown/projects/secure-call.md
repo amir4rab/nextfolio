@@ -1,7 +1,9 @@
 ---
 name: Secure Call
 id: 'secure-call'
-thumbnail: null
+thumbnail:
+  url: '/assets/projects/secure-call.png'
+  ratio: '1920/968'
 github: https://github.com/amir4rab/secureCall
 websiteAddress: null
 npmPackage: null

@@ -1,7 +1,9 @@
 ---
 name: 'Web3 hot wallet'
 id: 'web3HotWallet'
-thumbnail: null
+thumbnail:
+  url: '/assets/projects/web3-hot-wallet.png'
+  ratio: '1908/995'
 github: https://github.com/amir4rab/web3wallet
 websiteAddress: null
 npmPackage: null
