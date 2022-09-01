@@ -1,4 +1,3 @@
-import { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 
 // next
@@ -6,15 +5,17 @@ import Link from 'next/link';
 
 // mantine
 import { createStyles, keyframes } from '@mantine/styles';
+import { useScrollLock } from '@mantine/hooks';
 
 // next
 import { useRouter } from 'next/router';
 
 // framer-motion
-import { motion, AnimatePresence, usePresence } from 'framer-motion';
+import { motion, AnimatePresence, useIsPresent } from 'framer-motion';
 
 // components
 import Button from '@/subcomponents/button';
+import { useEffect } from 'react';
 
 // types
 interface Link {
@@ -55,7 +56,7 @@ const useStyles = createStyles((t) => ({
     top: 0,
     width: '100%',
     height: '100%',
-    backdropFilter: 'blur(.1rem)'
+    background: t.colors.dark[7] + 'b0'
   },
   drawer: {
     background: t.colorScheme === 'dark' ? t.colors.dark[5] : t.colors.gray[3],
@@ -92,7 +93,7 @@ const useStyles = createStyles((t) => ({
 const Drawer = ({ links, onClose }: { links: Links; onClose: () => void }) => {
   const { pathname } = useRouter();
   const { classes } = useStyles();
-  const [isPresent] = usePresence();
+  const isPresent = useIsPresent();
 
   return (
     <div
@@ -124,23 +125,24 @@ interface Props {
 
 const MobileDrawer = ({ onClose, status, links = [] }: Props) => {
   const { classes } = useStyles();
-  const closingTimeout = useRef<NodeJS.Timeout | null>(null);
+  const [, setScrollLocked] = useScrollLock();
 
   useEffect(() => {
-    const timeout = closingTimeout.current;
-    return () => {
-      timeout !== null && clearTimeout(timeout);
-    };
-  }, []);
+    typeof window !== 'undefined' && setScrollLocked(status);
+  }, [status, setScrollLocked]);
 
   return (
     <AnimatePresence>
       {status && (
         <motion.div
+          key='mobileDrawerWrapper'
           animate={{ opacity: 1, transition: { duration: 0.1 } }}
           initial={{ opacity: 0 }}
-          exit={{ opacity: 0, transition: { duration: 0.1, delay: 0.1 } }}
-          id='mobileDrawerWrapper'
+          exit={{
+            opacity: 0,
+            userSelect: 'none',
+            transition: { duration: 0.1, delay: 0.1 }
+          }}
           onClick={onClose}
           className={classes.wrapper}>
           <Drawer links={links} onClose={onClose} />
