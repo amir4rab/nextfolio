@@ -48,10 +48,16 @@ export const getStaticProps: GetStaticProps<
     }) as unknown as Promise<ProjectFrontmatter[]>
   ]);
 
+  const projectsFilters: { [v: string]: null } = {};
+  projects.forEach(({ tags }) => {
+    tags.forEach((i) => (projectsFilters[i] = null));
+  });
+
   return {
     props: {
       showcaseProjects,
-      projects
+      projects,
+      projectsFilters: Object.keys(projectsFilters)
     }
   };
 };

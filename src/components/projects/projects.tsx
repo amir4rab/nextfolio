@@ -8,6 +8,9 @@ import type {
 } from '@/types/markdownFrontmatter';
 
 // components
+const ProjectsDisplay = dynamic(() => import('./projectsDisplay'), {
+  suspense: true
+});
 const ProjectsShowcaseDisplay = dynamic(
   () => import('./projectsShowcaseDisplay'),
   {
@@ -17,15 +20,23 @@ const ProjectsShowcaseDisplay = dynamic(
 
 export interface ProjectsComponentProps {
   showcaseProjects: ShowcaseProjectFrontmatter[];
+  projectsFilters: string[];
   projects: ProjectFrontmatter[];
 }
 
-const Projects = ({ showcaseProjects }: ProjectsComponentProps) => {
+const Projects = ({
+  showcaseProjects,
+  projects,
+  projectsFilters
+}: ProjectsComponentProps) => {
   return (
     <div style={{ padding: '5vh 0' }}>
       <h1>Projects</h1>
-      <Suspense>
+      <Suspense fallback={null}>
         <ProjectsShowcaseDisplay projects={showcaseProjects} />
+      </Suspense>
+      <Suspense fallback={null}>
+        <ProjectsDisplay projects={projects} filters={projectsFilters} />
       </Suspense>
     </div>
   );
