@@ -21,6 +21,7 @@ const desktopMaxWidth = 966;
 
 const useStyles = createStyles((t) => ({
   main: {
+    padding: '5vh 0',
     [t.fn.largerThan('md')]: {
       margin: '0 auto',
       minHeight: '90.675vh',
