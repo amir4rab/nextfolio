@@ -30,7 +30,7 @@ const Projects = ({
   projectsFilters
 }: ProjectsComponentProps) => {
   return (
-    <>
+    <article style={{ paddingTop: '5vh' }}>
       <h1>Projects</h1>
       <Suspense fallback={null}>
         <ProjectsShowcaseDisplay projects={showcaseProjects} />
@@ -38,7 +38,7 @@ const Projects = ({
       <Suspense fallback={null}>
         <ProjectsDisplay projects={projects} filters={projectsFilters} />
       </Suspense>
-    </>
+    </article>
   );
 };
 

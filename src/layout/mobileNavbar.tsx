@@ -77,7 +77,7 @@ const MobileNavbar = () => {
   }, []);
 
   useEffect(() => {
-    typeof window !== undefined && eventHandler(isActive);
+    typeof window !== 'undefined' && eventHandler(isActive);
   }, [isActive, eventHandler]);
 
   return (

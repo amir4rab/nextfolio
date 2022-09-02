@@ -27,6 +27,9 @@ const ShowcaseTechnologies = dynamic(
 // styles
 const useStyles = createStyles((t) => ({
   article: {
+    [t.fn.smallerThan('md')]: {
+      paddingTop: '5vh'
+    },
     minHeight: '120vh'
   },
   header: {
