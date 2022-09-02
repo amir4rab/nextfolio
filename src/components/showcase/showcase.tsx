@@ -37,7 +37,6 @@ const ShowcaseTechnologies = dynamic(
 // styles
 const useStyles = createStyles((t) => ({
   article: {
-    padding: '10vh 0',
     minHeight: '120vh'
   },
   header: {
@@ -98,7 +97,7 @@ const Showcase = ({ mdxContent, frontmatterData }: ShowcaseProps) => {
       <Suspense fallback={null}>
         <ShowcaseScores frontmatter={frontmatterData} />
       </Suspense>
-      <Suspense>
+      <Suspense fallback={null}>
         <ShowcaseTechnologies
           delay={Object.keys(scores).length * 0.3}
           technologies={frontmatterData.mainTechnologies}
@@ -110,7 +109,7 @@ const Showcase = ({ mdxContent, frontmatterData }: ShowcaseProps) => {
           frontmatter={frontmatterData}
         />
       </Suspense>
-      <Suspense>
+      <Suspense fallback={null}>
         <ShowcaseCarousel
           data={frontmatterData.images}
           title='Screen shots'
