@@ -47,7 +47,6 @@ const useStyles = createStyles((t) => ({
   project: {
     padding: `${t.spacing.md}px 0`,
     ['&:not(:last-of-type)']: {
-      marginBottom: t.spacing.xl,
       borderBottom: `${
         t.colorScheme === 'dark' ? t.colors.dark[3] : t.colors.gray[3]
       } .1rem solid`
@@ -117,36 +116,42 @@ const ProjectsDisplay = ({ filters, projects }: Props) => {
         />
       </header>
       <div className={classes.projectsWrapper}>
-        <AnimatePresence>
-          {selectedProjects.map(({ id, name, tags, thumbnail, shortInfo }) => (
-            <motion.div
-              layoutId={!ssr ? id : undefined}
-              layout={!ssr ? true : undefined}
-              animate={{ opacity: 1, zIndex: 0 }}
-              exit={{ opacity: 0, zIndex: 0 }}
-              initial={{ opacity: 0, zIndex: 0 }}
-              className={classes.project}
-              key={id}>
-              <h5 className={classes.projectTitle}>{name}</h5>
-              {thumbnail && (
-                <img
-                  src={thumbnail.url}
-                  alt={name + ' image'}
-                  style={{ aspectRatio: thumbnail.ratio }}
-                  className={classes.projectThumbnail}
-                />
-              )}
-              <p className={classes.projectInfo}>{shortInfo}</p>
-              <p className={classes.projectsTags}>
-                {'Tags: ' + tags.join(', ')}
-              </p>
-              <div className={classes.projectActions}>
-                <Link passHref href={`/projects/${id}`}>
-                  <Button component='a'>Learn more</Button>
-                </Link>
-              </div>
-            </motion.div>
-          ))}
+        <AnimatePresence mode='popLayout'>
+          {selectedProjects.map(({ id, name, tags, thumbnail, shortInfo }) => {
+            return (
+              <motion.div
+                layoutId={!ssr ? id : undefined}
+                layout={!ssr ? true : undefined}
+                transition={{
+                  bounce: 0,
+                  duration: 0.3
+                }}
+                className={classes.project}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                initial={{ opacity: 0 }}
+                key={id}>
+                <h5 className={classes.projectTitle}>{name}</h5>
+                {thumbnail && (
+                  <img
+                    src={thumbnail.url}
+                    alt={name + ' image'}
+                    style={{ aspectRatio: thumbnail.ratio }}
+                    className={classes.projectThumbnail}
+                  />
+                )}
+                <p className={classes.projectInfo}>{shortInfo}</p>
+                <p className={classes.projectsTags}>
+                  {'Tags: ' + tags.join(', ')}
+                </p>
+                <div className={classes.projectActions}>
+                  <Link passHref href={`/projects/${id}`}>
+                    <Button component='a'>Learn more</Button>
+                  </Link>
+                </div>
+              </motion.div>
+            );
+          })}
         </AnimatePresence>
       </div>
     </article>
