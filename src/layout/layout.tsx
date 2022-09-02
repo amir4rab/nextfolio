@@ -65,7 +65,9 @@ const Layout = ({ children }: Props) => {
       <Suspense fallback={null}>
         <AuroraBackground />
       </Suspense>
-      <main className={classes.main}>{children}</main>
+      <main id='__main' className={classes.main}>
+        {children}
+      </main>
     </>
   );
 };

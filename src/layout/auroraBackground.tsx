@@ -19,7 +19,7 @@ const shine = keyframes({
 
 const useStyles = createStyles(() => ({
   wrapper: {
-    position: 'absolute',
+    position: 'fixed',
     overflow: 'hidden',
     left: 0,
     top: 0,
