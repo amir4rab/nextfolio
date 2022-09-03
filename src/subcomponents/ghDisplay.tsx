@@ -5,6 +5,7 @@ import { GhStats } from '@/utils/backend/getGhStats';
 
 // mantine
 import { createStyles, keyframes } from '@mantine/styles';
+import { useMediaQuery } from '@mantine/hooks';
 
 // icons
 import { IoPeople, IoStar, IoOpen } from 'react-icons/io5';
@@ -18,18 +19,21 @@ import Button from './button';
 
 // framer-motion
 import { AnimatePresence, motion } from 'framer-motion';
+import { SiGithub } from 'react-icons/si';
 
 const MotionArticle = ({
   children,
+  opacity,
   ...props
 }: {
+  opacity: number;
   className: string;
   key: string | number;
   children: ReactNode;
 }) => (
   <motion.article
     {...props}
-    animate={{ opacity: 1 }}
+    animate={{ opacity: opacity }}
     initial={{ opacity: 0 }}
     exit={{ opacity: 0 }}>
     {children}
@@ -51,6 +55,15 @@ const useStyles = createStyles((t) => ({
   ghDisplay: {
     margin: '10vh 0',
     animation: `${animateIn} .5s ease-in-out forwards`
+  },
+  title: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    fontSize: t.spacing.lg,
+    ['& svg']: {
+      marginRight: '.5rem'
+    }
   },
   header: {
     display: 'flex',
@@ -123,7 +136,7 @@ const useStyles = createStyles((t) => ({
       transition: 'transform .15s ease-in-out, opacity .15s ease-in-out',
       ['&:hover']: {
         transform: 'translate(0, -.1rem)',
-        opacity: 1
+        opacity: '1 !important'
       }
     }
   },
@@ -196,11 +209,15 @@ const GhDisplay = ({ ghData }: Props) => {
   const { classes } = useStyles();
   const { followers, following, rawData, total, totalRepos } = ghData;
   const [itemCount, setItemCount] = useState(4);
+  const isMobile = useMediaQuery('(max-width: 966px)');
 
   return (
     <section className={classes.ghDisplay}>
       <header className={classes.header}>
-        <h4>My Github stats</h4>
+        <h4 className={classes.title}>
+          <SiGithub />
+          <span>My Github stats</span>
+        </h4>
         <div className={classes.socialStats}>
           <div className={classes.socialStatsItem}>
             <GoGitCommit />
@@ -252,7 +269,10 @@ const GhDisplay = ({ ghData }: Props) => {
                     language,
                     html_url
                   }) => (
-                    <MotionArticle className={classes.card} key={id}>
+                    <MotionArticle
+                      opacity={isMobile ? 1 : 0.75}
+                      className={classes.card}
+                      key={id}>
                       <h5 className={classes.cardTitle}>{name}</h5>
                       <p className={classes.cardDescription}>{description}</p>
                       <footer className={classes.cardFooter}>
@@ -279,22 +299,25 @@ const GhDisplay = ({ ghData }: Props) => {
                       </footer>
                     </MotionArticle>
                   )
-                  )}
-                  {rawData.repos.length > itemCount && (
-                  <MotionArticle className={classes.card} key={`ghDisplay-show-more-${itemCount}`}>
-                    <h5 className={classes.cardTitle}>Show more</h5>
-                    <p className={classes.cardDescription}>want to see more?</p>
-                    <footer
-                      className={classes.cardFooter}
-                      style={{ justifyContent: 'flex-end' }}>
-                      <Button
-                        onClick={() => setItemCount((curr) => curr + 4)}
-                        sx={(t) => ({ fontSize: t.fontSizes.xs })}>
-                        Click here
-                      </Button>
-                    </footer>
-                  </MotionArticle>
                 )}
+              {rawData.repos.length > itemCount && (
+                <MotionArticle
+                  opacity={isMobile ? 1 : 0.75}
+                  className={classes.card}
+                  key={`ghDisplay-show-more-${itemCount}`}>
+                  <h5 className={classes.cardTitle}>Show more</h5>
+                  <p className={classes.cardDescription}>want to see more?</p>
+                  <footer
+                    className={classes.cardFooter}
+                    style={{ justifyContent: 'flex-end' }}>
+                    <Button
+                      onClick={() => setItemCount((curr) => curr + 4)}
+                      sx={(t) => ({ fontSize: t.fontSizes.xs })}>
+                      Click here
+                    </Button>
+                  </footer>
+                </MotionArticle>
+              )}
             </>
           ))()}
         </AnimatePresence>
