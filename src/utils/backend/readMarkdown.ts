@@ -5,7 +5,7 @@ import { cwd } from 'process';
 // third party utils
 import { serialize } from 'next-mdx-remote/serialize';
 
-import rehypePrism from 'rehype-prism-plus/common';
+import rehypePrism from 'rehype-prism-plus';
 
 // types
 import type { MDXRemoteSerializeResult } from 'next-mdx-remote';

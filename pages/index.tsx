@@ -57,8 +57,14 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     return {
       props: {
         ghData: {
-          profile: null,
-          repos: []
+          total: 0,
+          totalRepos: 0,
+          followers: 0,
+          following: 0,
+          rawData: {
+            profile: null,
+            repos: []
+          }
         },
         showcases: [] as Props['showcases']
       }
