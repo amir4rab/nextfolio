@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 
 // types
-import type { GetGhResult } from '@/utils/backend/getGh';
+import type { GhStats } from '@/utils/backend/getGhStats';
 import type { ShowcaseProjectFrontmatter } from '@/types/markdownFrontmatter';
 
 // components
@@ -45,7 +45,7 @@ const iconsArray = [
 ];
 
 interface Props {
-  ghData: GetGhResult;
+  ghData: GhStats;
   showcases: ShowcaseProjectFrontmatter[];
 }
 

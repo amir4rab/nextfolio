@@ -2,20 +2,20 @@ import Head from 'next/head';
 
 // types
 import type { NextPage, GetStaticProps } from 'next/types';
-import type { GetGhResult } from '@/utils/backend/getGh';
+import type { GhStats } from '@/utils/backend/getGhStats';
 import type { ShowcaseProjectFrontmatter } from '@/types/markdownFrontmatter';
 
 // components
 import Home from '@/components/home';
 
 // utils
-import getGh from '@/utils/backend/getGh';
 import listMarkdowns, {
   readMarkdownListFrontMatter
 } from '@/utils/backend/listMarkdowns';
+import getGhStats from '@/utils/backend/getGhStats';
 
 interface Props {
-  ghData: GetGhResult;
+  ghData: GhStats;
   showcases: ShowcaseProjectFrontmatter[];
 }
 
@@ -23,9 +23,7 @@ const HomePage: NextPage<Props> = ({ ghData, showcases }: Props) => {
   return (
     <div>
       <Head>
-        <title>Amir4rab</title>
-        <meta name='description' content='Personal portfolio' />
-        <link rel='icon' href='/favicon.ico' />
+        <title>Home - Amir4rab</title>
       </Head>
       <Home ghData={ghData} showcases={showcases} />
     </div>
@@ -43,7 +41,10 @@ const getMarkdownData = async () => {
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
   try {
-    const [ghData, showcases] = await Promise.all([getGh(), getMarkdownData()]);
+    const [ghData, showcases] = await Promise.all([
+      getGhStats(),
+      getMarkdownData()
+    ]);
     return {
       props: {
         ghData,
