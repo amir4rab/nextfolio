@@ -10,3 +10,6 @@
 - [x] Mobile Navbar
 - [x] PWA assets
 - [x] Dockerfile
+- [] background bug fixes
+- [] Custom scrollbar
+- [x] Updates to Github Display component

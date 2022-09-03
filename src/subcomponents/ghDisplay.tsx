@@ -1,14 +1,40 @@
+import { ReactNode, useState } from 'react';
+
 // types
-import { GetGhResult } from '@/utils/backend/getGh';
+import { GhStats } from '@/utils/backend/getGhStats';
 
 // mantine
 import { createStyles, keyframes } from '@mantine/styles';
 
 // icons
 import { IoPeople, IoStar, IoOpen } from 'react-icons/io5';
+import { GoRepo, GoGitCommit } from 'react-icons/go';
 
 // utils
 import getLangColor from '@/utils/frontend/getLangColor';
+
+// components
+import Button from './button';
+
+// framer-motion
+import { AnimatePresence, motion } from 'framer-motion';
+
+const MotionArticle = ({
+  children,
+  ...props
+}: {
+  className: string;
+  key: string | number;
+  children: ReactNode;
+}) => (
+  <motion.article
+    {...props}
+    animate={{ opacity: 1 }}
+    initial={{ opacity: 0 }}
+    exit={{ opacity: 0 }}>
+    {children}
+  </motion.article>
+);
 
 // keyframes
 const animateIn = keyframes({
@@ -37,6 +63,13 @@ const useStyles = createStyles((t) => ({
   socialStats: {
     display: 'flex',
     justifyContent: 'flex-end',
+    [t.fn.smallerThan('md')]: {
+      flexDirection: 'column'
+    }
+  },
+  socialStatsItem: {
+    display: 'flex',
+    justifyContent: 'flex-end',
     marginTop: t.spacing.md,
     fontSize: t.fontSizes.sm,
     alignItems: 'center',
@@ -44,7 +77,10 @@ const useStyles = createStyles((t) => ({
     color: t.colorScheme === 'dark' ? t.colors.gray[2] : t.black,
     [t.fn.largerThan('md')]: {
       flexDirection: 'row',
-      marginTop: 0
+      marginTop: 0,
+      ['&:not(:last-of-type)']: {
+        marginRight: t.spacing.xl
+      }
     },
     ['& svg']: {
       fontSize: t.fontSizes.xl
@@ -147,77 +183,121 @@ const useStyles = createStyles((t) => ({
   }
 }));
 
+const formatNumbers = (num: number) => {
+  const intl = new Intl.NumberFormat('de-DE');
+  return intl.format(num);
+};
+
 interface Props {
-  ghData: GetGhResult;
+  ghData: GhStats;
 }
 
 const GhDisplay = ({ ghData }: Props) => {
   const { classes } = useStyles();
+  const { followers, following, rawData, total, totalRepos } = ghData;
+  const [itemCount, setItemCount] = useState(4);
 
   return (
     <section className={classes.ghDisplay}>
       <header className={classes.header}>
         <h4>My Github stats</h4>
         <div className={classes.socialStats}>
-          <IoPeople />
-          <p>
-            <span>{`Followers: `}</span>
-            <a
-              href='https://github.com/amir4rab?tab=followers'
-              target='_blank'
-              rel='noreferrer'>
-              {ghData.profile?.followers}
-            </a>
-            <span>{`, Followings: `}</span>
-            <a
-              href='https://github.com/amir4rab?tab=following'
-              target='_blank'
-              rel='noreferrer'>
-              {ghData.profile?.following}
-            </a>
-          </p>
+          <div className={classes.socialStatsItem}>
+            <GoGitCommit />
+            <p>
+              <span>{`Commits: `}</span>
+              <a>{formatNumbers(total)}</a>
+            </p>
+          </div>
+          <div className={classes.socialStatsItem}>
+            <GoRepo />
+            <p>
+              <span>{`Repos: `}</span>
+              <a>{formatNumbers(totalRepos)}</a>
+            </p>
+          </div>
+          <div className={classes.socialStatsItem}>
+            <IoPeople />
+            <p>
+              <span>{`Followers: `}</span>
+              <a
+                href='https://github.com/amir4rab?tab=followers'
+                target='_blank'
+                rel='noreferrer'>
+                {formatNumbers(followers)}
+              </a>
+              <span>{`, Followings: `}</span>
+              <a
+                href='https://github.com/amir4rab?tab=following'
+                target='_blank'
+                rel='noreferrer'>
+                {formatNumbers(following)}
+              </a>
+            </p>
+          </div>
         </div>
       </header>
       <div className={classes.cardWrapper}>
-        {ghData.repos
-          .slice(0, 4)
-          .map(
-            ({
-              id,
-              name,
-              description,
-              stargazers_count,
-              language,
-              html_url
-            }) => (
-              <article className={classes.card} key={id}>
-                <h5 className={classes.cardTitle}>{name}</h5>
-                <p className={classes.cardDescription}>{description}</p>
-                <footer className={classes.cardFooter}>
-                  {language && (
-                    <div className={classes.langColorWrapper}>
-                      <div
-                        className={classes.langColor}
-                        style={{ background: getLangColor(language) }}
-                      />
-                      <p>{language}</p>
-                    </div>
+        <AnimatePresence>
+          {(() => (
+            <>
+              {rawData.repos
+                .slice(0, itemCount)
+                .map(
+                  ({
+                    id,
+                    name,
+                    description,
+                    stargazers_count,
+                    language,
+                    html_url
+                  }) => (
+                    <MotionArticle className={classes.card} key={id}>
+                      <h5 className={classes.cardTitle}>{name}</h5>
+                      <p className={classes.cardDescription}>{description}</p>
+                      <footer className={classes.cardFooter}>
+                        {language && (
+                          <div className={classes.langColorWrapper}>
+                            <div
+                              className={classes.langColor}
+                              style={{ background: getLangColor(language) }}
+                            />
+                            <p>{language}</p>
+                          </div>
+                        )}
+                        <div className={classes.starsWrapper}>
+                          <p>{stargazers_count}</p>
+                          <IoStar />
+                        </div>
+                        <a
+                          target='_blank'
+                          rel='noreferrer'
+                          className={classes.openRepo}
+                          href={html_url}>
+                          <IoOpen />
+                        </a>
+                      </footer>
+                    </MotionArticle>
+                  )
                   )}
-                  <div className={classes.starsWrapper}>
-                    <p>{stargazers_count}</p>
-                    <IoStar />
-                  </div>
-                  <a
-                    target='_blank'
-                    rel='noreferrer'
-                    className={classes.openRepo}
-                    href={html_url}>
-                    <IoOpen />
-                  </a>
-                </footer>
-              </article>
-            )
-          )}
+                  {rawData.repos.length > itemCount && (
+                  <MotionArticle className={classes.card} key={`ghDisplay-show-more-${itemCount}`}>
+                    <h5 className={classes.cardTitle}>Show more</h5>
+                    <p className={classes.cardDescription}>want to see more?</p>
+                    <footer
+                      className={classes.cardFooter}
+                      style={{ justifyContent: 'flex-end' }}>
+                      <Button
+                        onClick={() => setItemCount((curr) => curr + 4)}
+                        sx={(t) => ({ fontSize: t.fontSizes.xs })}>
+                        Click here
+                      </Button>
+                    </footer>
+                  </MotionArticle>
+                )}
+            </>
+          ))()}
+        </AnimatePresence>
       </div>
     </section>
   );
