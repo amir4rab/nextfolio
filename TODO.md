@@ -9,3 +9,4 @@
 - [x] Error pages ( inc: 404 and 500 )
 - [x] Mobile Navbar
 - [x] PWA assets
+- [x] Dockerfile

@@ -12,3 +12,4 @@
 - Added Markdown Wrapper
 - Added 404 Error page
 - Added favicon and PWA assets
+- Added Dockerfile
