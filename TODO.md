@@ -1,8 +1,11 @@
 - [x] Carousel bug fixes
 - [ ] About Page ( inc: Contact )
-- [ ] Project Page
+- [x] Projects Page
   - [x] Showcase Projects banner
+  - [x] Projects Display
+- [x] Project Page
 - [ ] Blogs Page ( inc: Search )
-- [ ] Blog Page Wrapper
-- [ ] Error pages ( inc: 404 and 500 )
+- [x] Markdown Wrapper
+- [x] Error pages ( inc: 404 and 500 )
 - [x] Mobile Navbar
+- [x] PWA assets

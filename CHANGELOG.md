@@ -5,3 +5,10 @@
 - Carousel bug fixes
 - Added showcase projects banner in projects page
 - Added mobile navbar and drawer
+- Added Projects Page
+- Added Showcase Projects banner
+- Added Projects Display
+- Added Project Page
+- Added Markdown Wrapper
+- Added 404 Error page
+- Added favicon and PWA assets
