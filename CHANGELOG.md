@@ -13,3 +13,4 @@
 - Added 404 Error page
 - Added favicon and PWA assets
 - Added Dockerfile
+- Added About page

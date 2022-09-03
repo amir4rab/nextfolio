@@ -1,5 +1,5 @@
 - [x] Carousel bug fixes
-- [ ] About Page ( inc: Contact )
+- [x] About Page ( inc: Contact )
 - [x] Projects Page
   - [x] Showcase Projects banner
   - [x] Projects Display
