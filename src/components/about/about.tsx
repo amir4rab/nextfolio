@@ -38,7 +38,7 @@ const About = ({ ghData }: Props) => {
   const { classes } = useStyles();
 
   return (
-    <>
+    <div style={{ padding: '5vh 0' }}>
       <h1 className={classes.title}>About</h1>
       <p className={classes.paragraph}>
         <span>{`I am a front-end engineer, interested in Web and Ui. I&apos;m currently studying Computer Engineering at university. I have been programming since February of 2020. I have some programming experience with the following technologies, `}</span>
@@ -88,7 +88,7 @@ const About = ({ ghData }: Props) => {
         <GhDisplay ghData={ghData} />
       </Suspense>
       <AboutContact />
-    </>
+    </div>
   );
 };
 

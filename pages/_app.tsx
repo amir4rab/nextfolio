@@ -25,6 +25,7 @@ export default function App(props: AppProps) {
         <meta name='description' content={description} />
         <meta name='format-detection' content='telephone=no' />
         <meta name='mobile-web-app-capable' content='yes' />
+        <link rel='icon' href='/favicon.png' type='image/png' />
 
         {/* Microsoft Application */}
         <meta name='msapplication-TileColor' content='#ffc0cb' />
