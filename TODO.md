@@ -4,8 +4,10 @@
   - [x] Showcase Projects banner
   - [x] Projects Display
 - [x] Project Page
-- [x] Blogs Page ( inc: Search )
+- [x] Blogs Page
   - [x] Blog footer
+  - [] search
+  - [] pagination
 - [x] Markdown Wrapper
 - [x] Error pages ( inc: 404 and 500 )
 - [x] Mobile Navbar

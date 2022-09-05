@@ -15,3 +15,4 @@
 - Added Dockerfile
 - Added About page
 - Added blog component
+- Added blogs page and component
