@@ -69,6 +69,24 @@ const Code = ({ children }: { children?: ReactNode }) => {
   );
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Image = (props: any) => {
+  return (
+    <img
+      {...props}
+      loading='lazy'
+      alt='image'
+      style={{
+        width: '100%',
+        height: '25vh',
+        minHeight: '25vh',
+        objectFit: 'cover',
+        objectPosition: 'center'
+      }}
+    />
+  );
+};
+
 interface props {
   mdxContent: MDXRemoteSerializeResult;
   animate?: {
@@ -80,7 +98,11 @@ const MarkdownWrapper = ({ mdxContent, animate }: props) => {
   if (typeof animate === 'undefined')
     return (
       <TypographyStylesProvider>
-        <MDXRemote {...mdxContent} lazy components={{ code: Code }} />
+        <MDXRemote
+          {...mdxContent}
+          lazy
+          components={{ code: Code, img: Image }}
+        />
       </TypographyStylesProvider>
     );
 
@@ -89,7 +111,11 @@ const MarkdownWrapper = ({ mdxContent, animate }: props) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: { delay: animate.delay } }}>
       <TypographyStylesProvider>
-        <MDXRemote {...mdxContent} lazy components={{ code: Code }} />
+        <MDXRemote
+          {...mdxContent}
+          lazy
+          components={{ code: Code, img: Image }}
+        />
       </TypographyStylesProvider>
     </motion.div>
   );

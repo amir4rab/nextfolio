@@ -7,7 +7,7 @@ import Link from 'next/link';
 // styles
 const useStyles = createStyles((t) => ({
   center: {
-    paddingTop: '10vh',
+    paddingTop: '5vh',
     flexDirection: 'column'
   },
   title: {

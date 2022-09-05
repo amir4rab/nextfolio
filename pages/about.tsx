@@ -16,12 +16,12 @@ interface Props {
 
 const AboutPage: NextPage<Props> = ({ ghData }: Props) => {
   return (
-    <div>
+    <>
       <Head>
         <title>About - Amir4rab</title>
       </Head>
       <About ghData={ghData} />
-    </div>
+    </>
   );
 };
 
