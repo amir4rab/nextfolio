@@ -14,3 +14,4 @@
 - Added favicon and PWA assets
 - Added Dockerfile
 - Added About page
+- Added blog component
