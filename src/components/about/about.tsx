@@ -6,13 +6,15 @@ import type { GhStats } from '@/utils/backend/getGhStats';
 
 // mantine
 import { createStyles } from '@mantine/styles';
-import AboutContact from './aboutContact';
 
 // dynamic components
 const AboutIconsRow = dynamic(() => import('./aboutIconsRow'), {
   suspense: true
 });
 const GhDisplay = dynamic(() => import('@/subcomponents/ghDisplay'), {
+  suspense: true
+});
+const AboutContact = dynamic(() => import('./aboutContact'), {
   suspense: true
 });
 
@@ -87,7 +89,9 @@ const About = ({ ghData }: Props) => {
       <Suspense fallback={null}>
         <GhDisplay ghData={ghData} />
       </Suspense>
-      <AboutContact />
+      <Suspense fallback={null}>
+        <AboutContact />
+      </Suspense>
     </div>
   );
 };
