@@ -80,3 +80,15 @@ export interface ProjectFrontmatter {
   tags: string[];
   mainTechnologies: Technologies[];
 }
+
+export interface BlogFrontmatter {
+  title: string;
+  thumbnail: {
+    url: string;
+    ratio: string;
+  } | null;
+  shortInfo: string;
+  tags: string[];
+  date: number;
+  category: string;
+}
