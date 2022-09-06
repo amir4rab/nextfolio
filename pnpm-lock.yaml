@@ -3,18 +3,15 @@ lockfileVersion: 5.4
 specifiers:
   '@emotion/react': ^11.10.0
   '@emotion/server': ^11.10.0
-  '@mantine/carousel': ^5.2.4
   '@mantine/core': ^5.2.4
   '@mantine/hooks': ^5.2.4
   '@mantine/next': ^5.2.4
-  '@mantine/prism': ^5.2.4
   '@mantine/styles': ^5.2.4
   '@types/node': 18.7.11
   '@types/react': 18.0.17
   '@types/react-dom': 18.0.6
   '@typescript-eslint/eslint-plugin': 5.33.0
   '@typescript-eslint/parser': ^5.34.0
-  embla-carousel-react: ^7.0.1
   eslint: 8.22.0
   eslint-config-next: 12.2.5
   eslint-plugin-react: ^7.30.1
@@ -32,13 +29,10 @@ specifiers:
 dependencies:
   '@emotion/react': 11.10.0_ug65io7jkbhmo4fihdmbrh3ina
   '@emotion/server': 11.10.0
-  '@mantine/carousel': 5.2.4_xv2k7zjviaqgviskeaesxktiaq
   '@mantine/core': 5.2.4_mqqlvahrhahrm6opx42tctcjti
   '@mantine/hooks': 5.2.4_react@18.2.0
   '@mantine/next': 5.2.4_t3fxnxh3gan3zthuvpuujvenue
-  '@mantine/prism': 5.2.4_pnotznusn57yqwluzmavmqvgti
   '@mantine/styles': 5.2.4_mg4fhtdxyo75pete66srcc5noa
-  embla-carousel-react: 7.0.1_react@18.2.0
   framer-motion: 7.2.1_biqbaboplfbrettd7655fr4n2y
   next: 12.2.5_drkpjgevzdykik2puzxtfkrafi
   next-mdx-remote: 4.1.0_biqbaboplfbrettd7655fr4n2y
@@ -320,21 +314,6 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
-  /@mantine/carousel/5.2.4_xv2k7zjviaqgviskeaesxktiaq:
-    resolution: {integrity: sha512-8dZLxf2J16vr98iepkPY7IkQWI6CjzVTZ5IYFRZQfd6BM0ZRCRgqlzEjI+4AoG8Z78HNNyxYlwoMpscB2Y2M8Q==}
-    peerDependencies:
-      '@mantine/core': 5.2.4
-      '@mantine/hooks': 5.2.4
-      embla-carousel-react: ^7.0.0
-      react: '>=16.8.0'
-    dependencies:
-      '@mantine/core': 5.2.4_mqqlvahrhahrm6opx42tctcjti
-      '@mantine/hooks': 5.2.4_react@18.2.0
-      '@mantine/utils': 5.2.4_react@18.2.0
-      embla-carousel-react: 7.0.1_react@18.2.0
-      react: 18.2.0
-    dev: false
-
   /@mantine/core/5.2.4_mqqlvahrhahrm6opx42tctcjti:
     resolution: {integrity: sha512-SSiu6G2ER428H7DPxG2FSyBbFLE4g1/U8vpe+qBnlLPgHn/YpBx/tzLjeOFUAfZ5abjZVBVwuOUPXcJ2h2Ewtg==}
     peerDependencies:
@@ -378,22 +357,6 @@ packages:
     transitivePeerDependencies:
       - '@emotion/react'
       - '@emotion/server'
-    dev: false
-
-  /@mantine/prism/5.2.4_pnotznusn57yqwluzmavmqvgti:
-    resolution: {integrity: sha512-77RL/ACfjWuDZSKG9a8Y7F/U5ieAIGBIODMqIbAN2czG1nAW86gDnoe6EX38O5DJsNZUuQ2h6fM+rFqD/ZU2Rw==}
-    peerDependencies:
-      '@mantine/core': 5.2.4
-      '@mantine/hooks': 5.2.4
-      react: '>=16.8.0'
-      react-dom: '>=16.8.0'
-    dependencies:
-      '@mantine/core': 5.2.4_mqqlvahrhahrm6opx42tctcjti
-      '@mantine/hooks': 5.2.4_react@18.2.0
-      '@mantine/utils': 5.2.4_react@18.2.0
-      prism-react-renderer: 1.3.5_react@18.2.0
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /@mantine/ssr/5.2.4_ggzehj26xzvkh5hu7mv3mcxwfu:
@@ -1474,19 +1437,6 @@ packages:
     resolution: {integrity: sha512-asLFVfWWtJ90ZyOUHMqk7/S2w2guQKxUI2itj3d92ADHhxUSbCMGi1f1cBcJ7xM1To+pE/Khbwo1yuNbMEPKeA==}
     dependencies:
       readable-stream: 2.3.7
-    dev: false
-
-  /embla-carousel-react/7.0.1_react@18.2.0:
-    resolution: {integrity: sha512-D97sHIMNYAClp27u4N86RVBbN9cNVAIri1SC6oIEFqeIovSGSV795tTiQuRL6M4vGXvlEnau+QtrVPVbaG5mcQ==}
-    peerDependencies:
-      react: ^18.1.0
-    dependencies:
-      embla-carousel: 7.0.1
-      react: 18.2.0
-    dev: false
-
-  /embla-carousel/7.0.1:
-    resolution: {integrity: sha512-+beEwrdj+FGyiz9a/prfj4IAG6CWDSRYUB3c+FKf17WUq5OxxKg5BVDF5FWcvC3EX6n8wFKQGXjkB3obnWZM8Q==}
     dev: false
 
   /emoji-regex/9.2.2:
@@ -3210,14 +3160,6 @@ packages:
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
-
-  /prism-react-renderer/1.3.5_react@18.2.0:
-    resolution: {integrity: sha512-IJ+MSwBWKG+SM3b2SUfdrhC+gu01QkV2KmRQgREThBfSQRoufqRfxfHUxpG1WcaFjP+kojcFyO9Qqtpgt3qLCg==}
-    peerDependencies:
-      react: '>=0.14.9'
-    dependencies:
-      react: 18.2.0
-    dev: false
 
   /process-nextick-args/2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}

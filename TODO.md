@@ -16,3 +16,4 @@
 - [] background bug fixes
 - [] Custom scrollbar
 - [x] Updates to Github Display component
+- [x] Custom Carousel

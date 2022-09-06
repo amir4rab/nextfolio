@@ -1,9 +1,6 @@
-//! Carousel needs to be replaced with my owns implementation !//
-
 import { useState } from 'react';
 
 // mantine
-import { Carousel as MantineCarousel } from '@mantine/carousel';
 import { createStyles } from '@mantine/styles';
 
 // types
@@ -14,6 +11,9 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 // icons
 import { IoPhonePortraitOutline, IoLaptopOutline } from 'react-icons/io5';
+
+// components
+import Carousel from '@/subcomponents/carousel';
 
 interface Props {
   data: ShowcaseProjectFrontmatter['images'];
@@ -88,44 +88,9 @@ const useStyles = createStyles((t) => ({
   }
 }));
 
-const useCarouselStyles = createStyles((t, _params, getRef) => ({
-  controls: {
-    ref: getRef('controls'),
-    transition: 'opacity 150ms ease',
-    opacity: 0
-  },
-
-  root: {
-    '&:hover': {
-      [`& .${getRef('controls')}`]: {
-        opacity: 1
-      }
-    }
-  },
-
-  control: {
-    ref: getRef('controls'),
-    background: t.colorScheme === 'dark' ? t.colors.dark[5] : t.colors.gray[4],
-    color: t.colorScheme === 'dark' ? t.colors.gray[4] : t.colors.dark[5],
-    transition: 'background .15s ease-in-out, color .15s ease-in-out',
-    border: 'none',
-    ['&:hover']: {
-      background: t.primaryColor,
-      color: t.colors.dark[5]
-    }
-  },
-
-  indicator: {
-    ref: getRef('indicators'),
-    background: t.primaryColor,
-    boxShadow: t.shadows.md
-  }
-}));
-
 const ShowcaseCarousel = ({ title, data, delay = 0 }: Props) => {
   const [imgType, setImgType] = useState<'desktop' | 'mobile'>('desktop');
   const { classes, cx } = useStyles();
-  const { classes: cClasses } = useCarouselStyles();
 
   return (
     <motion.section
@@ -156,65 +121,9 @@ const ShowcaseCarousel = ({ title, data, delay = 0 }: Props) => {
       <div className={classes.contentWrapper}>
         <AnimatePresence mode='wait' initial>
           {imgType === 'desktop' ? (
-            <motion.div
-              key='desktop'
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              initial={{ opacity: 0 }}>
-              <MantineCarousel
-                classNames={cClasses}
-                slideGap='md'
-                controlsOffset='xs'
-                loop
-                mx='auto'
-                withIndicators
-                sx={{ width: '100%', maxWidth: '100%' }}>
-                {data['desktop'].map((i) => (
-                  <MantineCarousel.Slide
-                    sx={{ display: 'flex', justifyContent: 'center' }}
-                    key={i}>
-                    <img
-                      className={classes.img}
-                      src={i}
-                      alt=''
-                      loading='lazy'
-                      style={{ aspectRatio: data.ratios['desktop'] }}
-                    />
-                  </MantineCarousel.Slide>
-                ))}
-              </MantineCarousel>
-            </motion.div>
+            <Carousel images={data.desktop} ratio={data.ratios.desktop} />
           ) : (
-            <motion.div
-              key='mobile'
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              initial={{ opacity: 0 }}>
-              <MantineCarousel
-                classNames={cClasses}
-                slideGap='md'
-                controlsOffset='xs'
-                loop
-                mx='auto'
-                withIndicators
-                sx={{ width: '100%', maxWidth: '100%' }}>
-                {data['mobile'].map((i) => (
-                  <MantineCarousel.Slide
-                    sx={{ display: 'flex', justifyContent: 'center' }}
-                    key={i}>
-                    <div className={classes.mobileImgWrapper}>
-                      <img
-                        className={classes.img}
-                        src={i}
-                        alt=''
-                        loading='lazy'
-                        style={{ aspectRatio: data.ratios['mobile'] }}
-                      />
-                    </div>
-                  </MantineCarousel.Slide>
-                ))}
-              </MantineCarousel>
-            </motion.div>
+            <Carousel images={data.mobile} ratio={data.ratios.mobile} />
           )}
         </AnimatePresence>
       </div>
