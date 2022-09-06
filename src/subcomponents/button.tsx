@@ -23,13 +23,17 @@ const useStyles = createStyles((t, styles?: CSSObject) => ({
     cursor: 'pointer',
     textDecoration: 'none',
     display: 'inline-block',
-    ['&:hover']: {
+    ['&:hover:not(:disabled)']: {
       transform: 'translate(0, -.05rem)',
       background: t.colors.dark[4]
     },
-    ['&:active']: {
+    ['&:active:not(:disabled)']: {
       transform: 'translate(0, -.1rem)',
       background: t.colors.dark[5]
+    },
+    ['&:disabled']: {
+      opacity: 0.5,
+      cursor: 'default'
     },
     ...styles
   }
@@ -37,6 +41,7 @@ const useStyles = createStyles((t, styles?: CSSObject) => ({
 
 export interface ButtonProps {
   component?: 'a' | 'button';
+  disabled?: boolean;
   children: ReactNode;
   onClick?: MouseEventHandler;
   className?: string;
