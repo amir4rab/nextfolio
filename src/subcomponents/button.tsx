@@ -23,17 +23,25 @@ const useStyles = createStyles((t, styles?: CSSObject) => ({
     cursor: 'pointer',
     textDecoration: 'none',
     display: 'inline-block',
-    ['&:hover:not(:disabled)']: {
+    ['&:hover']: {
       transform: 'translate(0, -.05rem)',
       background: t.colors.dark[4]
     },
-    ['&:active:not(:disabled)']: {
+    ['&:active']: {
       transform: 'translate(0, -.1rem)',
       background: t.colors.dark[5]
     },
     ['&:disabled']: {
       opacity: 0.5,
-      cursor: 'default'
+      cursor: 'default',
+      ['&:hover']: {
+        transform: '',
+        background: t.colors.dark[7]
+      },
+      ['&:active']: {
+        transform: '',
+        background: t.colors.dark[7]
+      }
     },
     ...styles
   }
