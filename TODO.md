@@ -14,6 +14,6 @@
 - [x] PWA assets
 - [x] Dockerfile
 - [] background bug fixes
-- [] Custom scrollbar
+- [x] Custom scrollbar
 - [x] Updates to Github Display component
 - [x] Custom Carousel

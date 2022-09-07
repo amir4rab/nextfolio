@@ -25,7 +25,8 @@ const useStyles = createStyles((t) => ({
     position: 'relative',
     padding: `10vh 10vw`,
     minWidth: '100%',
-    background: t.colors[t.colorScheme === 'dark' ? 'dark' : 'gray'][5],
+    background:
+      t.colorScheme === 'dark' ? t.colors.dark[5] : t.colors[t.primaryColor][2],
     boxShadow: t.shadows.md,
     transition: 'transform .1s ease-in-out',
     ['&:hover']: {
@@ -45,7 +46,10 @@ const useStyles = createStyles((t) => ({
         width: '100vw',
         zIndex: -1,
         height: '100%',
-        background: t.colors[t.colorScheme === 'dark' ? 'dark' : 'gray'][5],
+        background:
+          t.colorScheme === 'dark'
+            ? t.colors.dark[5]
+            : t.colors[t.primaryColor][2],
         content: '""'
       }
     }
@@ -60,7 +64,7 @@ const useStyles = createStyles((t) => ({
     background: 'transparent',
     textDecoration: 'none',
     userSelect: 'none',
-    color: t.primaryColor,
+    color: t.colorScheme === 'dark' ? t.primaryColor : t.white,
     [t.fn.largerThan('md')]: {
       padding: t.spacing.xs * 0.75,
       borderRadius: t.radius.sm,
@@ -124,11 +128,17 @@ const HomeCard = () => {
           <Button
             sx={(t) => ({
               border: `.1rem solid ${t.colors.dark[7]} !important`,
-              boxShadow: `0 0 1rem ${t.colors[t.primaryColor][3]}00`,
+              boxShadow:
+                t.colorScheme === 'dark'
+                  ? `0 0 1rem ${t.colors[t.primaryColor][3]}00`
+                  : `0 0 1rem ${t.colors.dark[3]}00`,
               transition:
                 'transform .1s ease-in-out, boxShadow .3s ease-in-out',
               ['&:hover']: {
-                boxShadow: `0 0 1rem ${t.colors[t.primaryColor][2]}50`,
+                boxShadow:
+                  t.colorScheme === 'dark'
+                    ? `0 0 1rem ${t.colors[t.primaryColor][2]}50`
+                    : `0 .5rem 1rem ${t.colors.dark[2]}50`,
                 transform: 'translate(0, -.05rem)'
               }
             })}

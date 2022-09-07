@@ -17,3 +17,4 @@
 - Added blog component
 - Added blogs page and component
 - Added custom Carousel
+- Added Custom scrollbar

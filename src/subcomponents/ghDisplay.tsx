@@ -126,10 +126,9 @@ const useStyles = createStyles((t) => ({
     display: 'flex',
     flexDirection: 'column',
     borderRadius: t.radius.lg,
+    color: t.colors.gray[2],
     background:
-      t.colorScheme === 'dark'
-        ? t.colors.dark[5] + 'a0'
-        : t.colors.gray[3] + 'a0',
+      t.colorScheme === 'dark' ? t.colors.dark[5] + 'a0' : t.colors.dark[7],
     boxShadow: t.shadows.md,
     [t.fn.largerThan('md')]: {
       opacity: 0.75,

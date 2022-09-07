@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 // mantine
-import { createStyles, keyframes } from '@mantine/styles';
+import { createStyles, keyframes, useMantineTheme } from '@mantine/styles';
 
 // framer-motion
 import { AnimatePresence, motion } from 'framer-motion';
@@ -142,6 +142,7 @@ const useStyles = createStyles((t) => ({
     width: '100%',
     transform: 'rotate(5deg)',
     opacity: 0.7,
+    background: 'black',
     aspectRatio: '2420/2160'
   },
   cardBackground: {
@@ -158,9 +159,10 @@ const InnerCard = ({
 }: {
   application: ShowcaseProjectFrontmatter;
 }) => {
+  const { colorScheme } = useMantineTheme();
   const { id, name, shortInfo, images, background } = application;
   const { banner } = images;
-  const { muted } = background;
+  const { muted, colorful } = background;
 
   const { classes } = useStyles();
 
@@ -185,9 +187,9 @@ const InnerCard = ({
       <motion.div
         className={classes.cardBackground}
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        animate={{ opacity: colorScheme === 'dark' ? 1 : 0.75 }}
         exit={{ opacity: 0 }}
-        style={{ background: muted }}
+        style={{ background: colorScheme === 'dark' ? muted : colorful }}
         key={id + '-banner'}>
         <img
           className={classes.cardBanner}

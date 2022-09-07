@@ -65,13 +65,16 @@ const useStyle = createStyles((t) => ({
     transform: 'translate(0, -50%)',
     padding: t.spacing.xs,
     borderRadius: '50%',
-    ['&:hover:not(:disabled)']: {
+    ['&:hover']: {
       transform: 'translate(0, calc(-50% - .05rem))',
       background: t.colors.dark[4]
     },
-    ['&:active:not(:disabled)']: {
+    ['&:active']: {
       transform: 'translate(0, calc(-50% - .1rem))',
       background: t.colors.dark[5]
+    },
+    ['&:disabled']: {
+      opacity: 0
     }
   },
   rightButton: {

@@ -27,7 +27,10 @@ const useStyles = createStyles((t, desktopMaxWidth: number) => ({
     width: '100%',
     zIndex: 10,
     backdropFilter: 'blur(.2rem)',
-    background: t.colors.dark[7] + 'a0',
+    background:
+      t.colorScheme === 'dark'
+        ? t.colors.dark[7] + 'a0'
+        : t.colors.dark[7] + 'c0',
     overflow: 'hidden'
   },
   navbar: {
