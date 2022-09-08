@@ -1,11 +1,14 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
+import { useRouter } from 'next/router';
 
 // framer-motion
 import { AnimatePresence, motion } from 'framer-motion';
 
 // mantine
-import { createStyles, keyframes } from '@mantine/styles';
-import { useDebouncedState } from '@mantine/hooks';
+import { createStyles, keyframes, useMantineTheme } from '@mantine/styles';
+
+// hooks
+import useSsr from '@/hooks/useSsr';
 
 // keyframes
 const shine = keyframes({
@@ -38,81 +41,47 @@ const useStyles = createStyles(() => ({
 interface Aurora {
   size: number;
   left: string;
-  top: number;
+  top: string;
   background: string;
   key: string;
 }
 
 const AuroraBackground = () => {
+  const { colorScheme } = useMantineTheme();
   const { classes } = useStyles();
   const [auroras, setAuroras] = useState<Aurora[]>([]);
-  const [displayHeight, setDisplayHeight] = useDebouncedState<number | null>(
-    null,
-    300
-  );
+  const ssr = useSsr();
+  const { pathname } = useRouter();
 
   useMemo(() => {
-    if (displayHeight === null) return;
-
-    const sectionHeights = 1_000;
-    const newAurorasCount = parseInt(
-      (displayHeight / sectionHeights).toFixed(0)
-    );
-    const currentCount = auroras.length;
-
-    if (currentCount === newAurorasCount) return;
-
-    if (currentCount > newAurorasCount) {
-      setAuroras((curr) => curr.slice(0, newAurorasCount));
-
-      return;
-    }
+    if (ssr) return;
 
     const newAuroras: Aurora[] = [];
-    for (let i = 0 + currentCount; i < newAurorasCount; i++) {
+    for (let i = 0; i < 2; i++) {
       const size = parseInt((50 + Math.random() * 50).toFixed(2));
       const left = `calc(${(Math.random() * 100).toFixed(2)}vw - ${
         size / 2
       }rem)`;
 
       newAuroras.push({
-        key: (Math.random() * 100000).toFixed(0),
+        key: (Math.random() * pathname.length * 1000).toFixed(0),
         size: size,
         left,
-        top: i * sectionHeights - Math.random() * sectionHeights,
+        top: i * Math.random() * 50 + 'vh',
         background:
-          'radial-gradient(50% 50% at 50% 50%, #ffc0cb70 0%, #00000000 100%)'
+          'radial-gradient(50% 50% at 50% 50%, #ffc0cb 0%, #ffc0cb00 100%)'
       });
     }
-    setAuroras((curr) => [...curr, ...newAuroras]);
-  }, [displayHeight, auroras.length]);
-
-  const setHeightFn = useCallback(() => {
-    const body = document.body as HTMLBodyElement;
-
-    setDisplayHeight(body.offsetHeight);
-  }, [setDisplayHeight]);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    setHeightFn();
-
-    window.addEventListener('resize', setHeightFn);
-    return () => {
-      window.removeEventListener('resize', setHeightFn);
-    };
-  }, [setHeightFn]);
+    setAuroras([...newAuroras]);
+  }, [ssr, pathname]);
 
   return (
-    <div
-      style={displayHeight !== null ? { height: displayHeight } : {}}
-      className={classes.wrapper}>
+    <div className={classes.wrapper}>
       <AnimatePresence>
         {auroras.map(({ size, key, ...props }) => (
           <motion.div
             animate={{
-              opacity: 0.5,
+              opacity: colorScheme === 'dark' ? 0.25 : 0,
               transition: {
                 duration: 1
               }

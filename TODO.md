@@ -13,7 +13,7 @@
 - [x] Mobile Navbar
 - [x] PWA assets
 - [x] Dockerfile
-- [] background bug fixes
+- [x] background bug fixes
 - [x] Custom scrollbar
 - [x] Updates to Github Display component
 - [x] Custom Carousel
