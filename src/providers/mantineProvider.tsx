@@ -45,6 +45,13 @@ const MantineProvider = ({ children }: Props) => {
               margin: 0
             },
 
+            'p a': {
+              color:
+                t.colorScheme === 'dark'
+                  ? t.primaryColor
+                  : t.colors[t.primaryColor][5] + ' !important'
+            },
+
             '*::-webkit-scrollbar': {
               background: 'transparent',
               width: '.5em',
