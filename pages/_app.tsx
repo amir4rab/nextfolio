@@ -69,10 +69,7 @@ export default function App(props: AppProps) {
         <meta name='twitter:url' content={domain} />
         <meta name='twitter:title' content={title} />
         <meta name='twitter:description' content={description} />
-        <meta
-          name='twitter:image'
-          content={`${domain}/assets/icons/android-chrome-192x192.png`}
-        />
+        <meta name='twitter:image' content={`${domain}/banner.png`} />
         <meta name='twitter:creator' content='@amir4rab' />
 
         {/* Open graph */}
