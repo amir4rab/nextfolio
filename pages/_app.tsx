@@ -81,10 +81,7 @@ export default function App(props: AppProps) {
         <meta property='og:description' content={description} />
         <meta property='og:site_name' content={title} />
         <meta property='og:url' content={domain} />
-        <meta
-          property='og:image'
-          content={`${domain}/assets/icons/touch-icon-iphone-retina.png`}
-        />
+        <meta property='og:image' content={`${domain}/banner.png`} />
 
         {/* viewport */}
         <meta
