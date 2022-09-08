@@ -18,3 +18,4 @@
 - Added blogs page and component
 - Added custom Carousel
 - Added Custom scrollbar
+- Added Footer

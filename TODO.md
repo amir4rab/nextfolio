@@ -17,3 +17,4 @@
 - [x] Custom scrollbar
 - [x] Updates to Github Display component
 - [x] Custom Carousel
+- [x] Footer

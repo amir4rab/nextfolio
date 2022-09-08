@@ -15,6 +15,9 @@ import MobileNavbar from './mobileNavbar';
 const AuroraBackground = dynamic(() => import('./auroraBackground'), {
   suspense: true
 });
+const Footer = dynamic(() => import('./footer'), {
+  suspense: true
+});
 
 // constants
 const desktopMaxWidth = 966;
@@ -68,6 +71,9 @@ const Layout = ({ children }: Props) => {
       <main id='__main' className={classes.main}>
         {children}
       </main>
+      <Suspense fallback={null}>
+        <Footer desktopMaxWidth={desktopMaxWidth} />
+      </Suspense>
     </>
   );
 };
