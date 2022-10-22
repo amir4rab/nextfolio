@@ -4,7 +4,6 @@ import Head from 'next/head';
 import type { NextPage, GetStaticProps } from 'next';
 import type { ProjectsComponentProps } from '@/components/projects';
 import type {
-  ProjectFrontmatter,
   ShowcaseProjectFrontmatter
 } from '@/types/markdownFrontmatter';
 
@@ -32,31 +31,23 @@ const ProjectsPage: NextPage<ProjectsComponentProps> = (
 export const getStaticProps: GetStaticProps<
   ProjectsComponentProps
 > = async () => {
-  const [showcaseProjectsFiles, projectsFiles] = await Promise.all([
-    listMarkdowns({ folder: 'showcase' }),
-    listMarkdowns({ folder: 'projects' })
+  const [showcaseProjectsFiles] = await Promise.all([
+    listMarkdowns({ folder: 'showcase' })
   ]);
 
-  const [showcaseProjects, projects] = await Promise.all([
+  const [showcaseProjects] = await Promise.all([
     readMarkdownListFrontMatter({
       folder: 'showcase',
       arr: showcaseProjectsFiles
-    }) as unknown as Promise<ShowcaseProjectFrontmatter[]>,
-    readMarkdownListFrontMatter({
-      folder: 'projects',
-      arr: projectsFiles
-    }) as unknown as Promise<ProjectFrontmatter[]>
+    }) as unknown as Promise<ShowcaseProjectFrontmatter[]>
   ]);
 
   const projectsFilters: { [v: string]: null } = {};
-  projects.forEach(({ tags }) => {
-    tags.forEach((i) => (projectsFilters[i] = null));
-  });
 
   return {
     props: {
       showcaseProjects,
-      projects,
+      projects: [],
       projectsFilters: Object.keys(projectsFilters)
     }
   };

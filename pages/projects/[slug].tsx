@@ -4,7 +4,7 @@ import Head from 'next/head';
 import type { NextPage, GetStaticProps, GetStaticPaths } from 'next/types';
 
 // utils
-import listMarkdowns from '@/utils/backend/listMarkdowns';
+// import listMarkdowns from '@/utils/backend/listMarkdowns';
 import readMarkdown from '@/utils/backend/readMarkdown';
 
 // components
@@ -49,14 +49,10 @@ export const getStaticProps: GetStaticProps<ProjectProps> = async (context) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const files = await listMarkdowns({ folder: 'projects' });
+  // const files = await listMarkdowns({ folder: 'projects' });
 
   return {
-    paths: files.map((i) => ({
-      params: {
-        slug: i
-      }
-    })),
+    paths: [],
     fallback: false
   };
 };
