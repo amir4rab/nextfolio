@@ -221,14 +221,14 @@ const GhDisplay = ({ ghData }: Props) => {
           <div className={classes.socialStatsItem}>
             <GoGitCommit />
             <p>
-              <span>{`Commits: `}</span>
+              <span>{`Public Commits: `}</span>
               <a>{formatNumbers(total)}</a>
             </p>
           </div>
           <div className={classes.socialStatsItem}>
             <GoRepo />
             <p>
-              <span>{`Repos: `}</span>
+              <span>{`Public Repos: `}</span>
               <a>{formatNumbers(totalRepos)}</a>
             </p>
           </div>

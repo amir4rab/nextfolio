@@ -59,7 +59,7 @@ const Layout = ({ children }: Props) => {
         <DesktopNavbar.Item
           active={pathname.includes('showcase')}
           href='/#showcase'>
-          showcase
+          Showcase
         </DesktopNavbar.Item>
         <DesktopNavbar.Item href='/projects'>Projects</DesktopNavbar.Item>
         <DesktopNavbar.Item href='/blog'>Blog</DesktopNavbar.Item>
