@@ -107,7 +107,7 @@ const HomeCard = () => {
         <span className={classes.titleText}>{' a Front-end Engineer.'}</span>
       </h1>
       <div className={classes.buttonsWrapper}>
-        <Link passHref href='/about'>
+        <Link passHref href='/about' legacyBehavior>
           <Button
             sx={() => ({
               border: `.1rem solid transparent !important`,
@@ -124,7 +124,7 @@ const HomeCard = () => {
             About me
           </Button>
         </Link>
-        <Link passHref href='/about#contact'>
+        <Link passHref href='/about#contact' legacyBehavior>
           <Button
             sx={(t) => ({
               border: `.1rem solid ${t.colors.dark[7]} !important`,

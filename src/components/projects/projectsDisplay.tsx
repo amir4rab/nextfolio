@@ -145,7 +145,7 @@ const ProjectsDisplay = ({ filters, projects }: Props) => {
                   {'Tags: ' + tags.join(', ')}
                 </p>
                 <div className={classes.projectActions}>
-                  <Link passHref href={`/projects/${id}`}>
+                  <Link passHref href={`/projects/${id}`} legacyBehavior>
                     <Button component='a'>Learn more</Button>
                   </Link>
                 </div>

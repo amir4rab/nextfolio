@@ -235,7 +235,7 @@ const DesktopNavbar = ({ children, desktopMaxWidth, socials }: NavbarProps) => {
       }}>
       <div className={classes.navbarWrapper}>
         <nav className={classes.navbar}>
-          <Link href='/' passHref>
+          <Link href='/' passHref legacyBehavior>
             <a className={classes.title}>Amir4rab</a>
           </Link>
           {!ssr && (
@@ -300,7 +300,7 @@ const Item = ({ children, active = false, ...props }: ItemProps) => {
   const { pathname } = useRouter();
 
   return (
-    <Link {...props} passHref>
+    <Link {...props} passHref legacyBehavior>
       <a
         onMouseEnter={onHover}
         className={cx(

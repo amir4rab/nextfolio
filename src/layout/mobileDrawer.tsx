@@ -101,7 +101,7 @@ const Drawer = ({ links, onClose }: { links: Links; onClose: () => void }) => {
       data-hidden={!isPresent ? true : undefined}
       className={classes.drawer}>
       {links.map(({ href, isActive, name }) => (
-        <Link key={href} href={href} passHref>
+        <Link key={href} href={href} passHref legacyBehavior>
           <Button
             className={classes.navButton}
             data-active={

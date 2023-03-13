@@ -177,7 +177,7 @@ const InnerCard = ({
         <div className={classes.cardDetails}>
           <p className={classes.cardTitle}>{name}</p>
           <p>{shortInfo}</p>
-          <Link href={`/showcase/${id}`} passHref>
+          <Link href={`/showcase/${id}`} passHref legacyBehavior>
             <Button component='a' sx={(t) => ({ fontSize: t.fontSizes.xs })}>
               Read more
             </Button>

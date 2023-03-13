@@ -117,7 +117,7 @@ const Blogs = ({ blogs }: Props) => {
               <p className={classes.blogCardTitleInfo}>{shortInfo}</p>
               <div className={classes.blogCardActions}>
                 <p className={classes.date}>{getDate(date)}</p>
-                <Link passHref href={`/blog/${slug}`}>
+                <Link passHref href={`/blog/${slug}`} legacyBehavior>
                   <Button component='a'>Read</Button>
                 </Link>
               </div>

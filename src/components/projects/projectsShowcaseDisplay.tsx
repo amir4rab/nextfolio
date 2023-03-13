@@ -301,7 +301,7 @@ const ProjectsShowcaseDisplay = ({ projects }: Props) => {
                     <p className={classes.itemInfoDescription}>{shortInfo}</p>
                     <TechnologiesRow technologies={mainTechnologies} />
                     <div>
-                      <Link passHref href={'/showcase/' + id}>
+                      <Link passHref href={'/showcase/' + id} legacyBehavior>
                         <Button
                           sx={(t) => ({
                             background: background.colorful,

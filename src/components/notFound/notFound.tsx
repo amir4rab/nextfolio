@@ -38,7 +38,7 @@ const NotFound = () => {
         <span>
           {`Sorry, it seems like you followed a wrong path, click here `}
         </span>
-        <Link passHref href='/'>
+        <Link passHref href='/' legacyBehavior>
           <a>Here</a>
         </Link>
         <span>{` to go back to home screen.`}</span>
