@@ -8,7 +8,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 // types
 import type { ShowcaseProjectFrontmatter } from '@/types/markdownFrontmatter';
-import type { AnimationProps } from 'framer-motion';
 
 // components
 import Button from '@/subcomponents/button';
@@ -139,114 +138,6 @@ const useStyles = createStyles((t) => ({
   }
 }));
 
-// animations
-const animationsTransition: AnimationProps['transition'] = {
-  type: 'spring',
-  bounce: 0.45,
-  duration: 1
-};
-
-const imageVariants: AnimationProps['variants'] = {
-  center: {
-    transform: 'translate(-50%, -50%) scale(1)',
-    opacity: 1,
-    transition: animationsTransition
-  },
-  per: {
-    transform: 'translate(-150%, -50%) scale(.75)',
-    opacity: 1,
-    transition: animationsTransition
-  },
-  next: {
-    transform: 'translate(50%, -50%) scale(.75)',
-    opacity: 1,
-    transition: animationsTransition
-  },
-  perHover: {
-    transform: 'translate(-150%, -50%) scale(.77)',
-    opacity: 1,
-    transition: animationsTransition
-  },
-  nextHover: {
-    transform: 'translate(50%, -50%) scale(.77)',
-    opacity: 1,
-    transition: animationsTransition
-  },
-  hiddenRight: {
-    transform: 'translate(175%, -50%) scale(.75)',
-    opacity: 1,
-    transition: animationsTransition
-  },
-  hiddenLeft: {
-    transform: 'translate(-275%, -50%) scale(.75)',
-    opacity: 1,
-    transition: animationsTransition
-  },
-  exit: {
-    opacity: 0
-  },
-  centerInitial: {
-    transform: 'translate(-50%, -100%) scale(1)',
-    opacity: 0
-  },
-  perInitial: {
-    transform: 'translate(-150%, -100%) scale(.75)',
-    opacity: 0
-  },
-  nextInitial: {
-    transform: 'translate(50%, -100%) scale(.75)',
-    opacity: 0
-  },
-  hiddenRightInitial: {
-    transform: 'translate(175%, -100%) scale(.75)',
-    opacity: 0
-  },
-  hiddenLeftInitial: {
-    transform: 'translate(-275%, -100%) scale(.75)',
-    opacity: 0
-  },
-  centerExit: {
-    transform: 'translate(-50%, 0%) scale(1)',
-    opacity: 0,
-    transition: animationsTransition
-  },
-  perExit: {
-    transform: 'translate(-150%, 0%) scale(.75)',
-    opacity: 0,
-    transition: animationsTransition
-  },
-  nextExit: {
-    transform: 'translate(50%, 0%) scale(.75)',
-    opacity: 0,
-    transition: animationsTransition
-  },
-  hiddenRightExit: {
-    transform: 'translate(175%, 0%) scale(.75)',
-    opacity: 0,
-    transition: animationsTransition
-  },
-  hiddenLeftExit: {
-    transform: 'translate(-275%, 0%) scale(.75)',
-    opacity: 0,
-    transition: animationsTransition
-  }
-};
-
-const getAnimationName = (
-  i: number,
-  activeIndex: number,
-  prefix: '' | 'Exit' | 'Initial' | 'Hover'
-) =>
-  i === activeIndex
-    ? 'center' + prefix
-    : i - 1 === activeIndex
-    ? 'next' + prefix
-    : i + 1 === activeIndex
-    ? 'per' + prefix
-    : i > activeIndex
-    ? 'hiddenRight' + prefix
-    : 'hiddenLeft' + prefix;
-
 interface Props {
   projects: ShowcaseProjectFrontmatter[];
 }
@@ -357,11 +248,16 @@ const ProjectsShowcaseDisplay = ({ projects }: Props) => {
               <motion.img
                 data-active={i === activeScreenshot ? true : undefined}
                 onClick={() => setActiveScreenshot(i)}
-                variants={imageVariants}
-                initial={getAnimationName(i, activeScreenshot, 'Initial')}
-                animate={getAnimationName(i, activeScreenshot, '')}
-                exit={getAnimationName(i, activeScreenshot, 'Exit')}
-                whileHover={getAnimationName(i, activeScreenshot, 'Hover')}
+                initial={{
+                  opacity: 0,
+                  transform: 'translate(-50%, -50%)'
+                }}
+                animate={{
+                  opacity: i === activeScreenshot ? 1 : 0
+                }}
+                exit={{
+                  opacity: 0
+                }}
                 loading='lazy'
                 style={{
                   aspectRatio: projects[activeItem].images.ratios.mobile
@@ -395,7 +291,7 @@ const ProjectsShowcaseDisplay = ({ projects }: Props) => {
         </figure>
       </div>
     </motion.section>
-  );
+  ); 
 };
 
 export default ProjectsShowcaseDisplay;
