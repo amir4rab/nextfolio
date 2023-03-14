@@ -2,6 +2,7 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import '@/styles/code.css';
+import '@/styles/styles.global.scss';
 import MantineProvider from '@/providers/mantineProvider';
 
 const domain = 'https://amir4rab.com';
@@ -9,8 +10,7 @@ const title = 'Amir4rab';
 const description = 'Front-end engineer, interested in Web and UI';
 const twitterCard = 'My personal portfolio';
 
-export default function App(props: AppProps) {
-  const { Component, pageProps } = props;
+export default function App(props: AppProps) { const { Component, pageProps } = props;
 
   return (
     <>

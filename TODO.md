@@ -18,3 +18,7 @@
 - [x] Updates to Github Display component
 - [x] Custom Carousel
 - [x] Footer
+- [ ] Transition to use APP directory
+  - [ ] Removing Mantine/Emotion
+    - [x] Global Stylings
+    - [ ] Gradual transition from CSS in JS to SCSS
