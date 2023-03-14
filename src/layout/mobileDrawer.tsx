@@ -101,13 +101,12 @@ const Drawer = ({ links, onClose }: { links: Links; onClose: () => void }) => {
       data-hidden={!isPresent ? true : undefined}
       className={classes.drawer}>
       {links.map(({ href, isActive, name }) => (
-        <Link key={href} href={href} passHref legacyBehavior>
+        <Link key={href} href={href}>
           <Button
             className={classes.navButton}
             data-active={
               isActive ? isActive : pathname === href ? true : undefined
             }
-            component='a'
             onClick={onClose}>
             {name}
           </Button>

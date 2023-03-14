@@ -22,4 +22,5 @@
   - [ ] Removing Mantine/Emotion
     - [x] Global Stylings
     - [x] Updated Button sub-component
+    - [x] Updated Next Links
     - [ ] Gradual transition from CSS in JS to SCSS
