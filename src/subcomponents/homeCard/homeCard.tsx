@@ -7,6 +7,9 @@ import { createStyles, keyframes } from '@mantine/styles';
 // components
 import Button from '@/subcomponents/button';
 
+// styles
+import scssClasses from './homeCard.module.scss';
+
 // keyframes
 const animateBoxIn = keyframes({
   from: {
@@ -82,11 +85,6 @@ const useStyles = createStyles((t) => ({
   buttonsWrapper: {
     display: 'flex',
     justifyContent: 'flex-end'
-  },
-  button: {
-    ['&:not(:last-of-type)']: {
-      marginRight: '1rem'
-    }
   }
 }));
 
@@ -107,43 +105,15 @@ const HomeCard = () => {
         <span className={classes.titleText}>{' a Front-end Engineer.'}</span>
       </h1>
       <div className={classes.buttonsWrapper}>
-        <Link passHref href='/about' legacyBehavior>
+        <Link href='/about'>
           <Button
-            sx={() => ({
-              border: `.1rem solid transparent !important`,
-              background: 'transparent',
-              ['&:hover']: {
-                background: 'transparent'
-              },
-              ['&:active']: {
-                background: 'transparent'
-              }
-            })}
-            className={classes.button}
-            component='a'>
+            className={scssClasses._btnSecondary}>
             About me
           </Button>
         </Link>
-        <Link passHref href='/about#contact' legacyBehavior>
+        <Link href='/about#contact'>
           <Button
-            sx={(t) => ({
-              border: `.1rem solid ${t.colors.dark[7]} !important`,
-              boxShadow:
-                t.colorScheme === 'dark'
-                  ? `0 0 1rem ${t.colors[t.primaryColor][3]}00`
-                  : `0 0 1rem ${t.colors.dark[3]}00`,
-              transition:
-                'transform .1s ease-in-out, boxShadow .3s ease-in-out',
-              ['&:hover']: {
-                boxShadow:
-                  t.colorScheme === 'dark'
-                    ? `0 0 1rem ${t.colors[t.primaryColor][2]}50`
-                    : `0 .5rem 1rem ${t.colors.dark[2]}50`,
-                transform: 'translate(0, -.05rem)'
-              }
-            })}
-            className={classes.button}
-            component='a'>
+            className={scssClasses._btnPrimary}>
             Contact me
           </Button>
         </Link>

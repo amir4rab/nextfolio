@@ -1,0 +1,31 @@
+@layer customized {
+  ._btnHighlighted {
+    color: var(--dark-9);
+    position: relative;
+    background: attr(--background);
+    overflow: visible;
+    &:hover {
+      transform: translate(0, -.2rem);
+      &::after {
+        opacity: 0.75
+      }
+    }
+    &:active {
+      transform: translate(0rem, -.4rem);
+    }
+    &::after {
+      left: -.5rem;
+      top: -.5rem;
+      background: inherit;
+      width: calc(100% + 1rem);
+      height: calc(100% + 1rem);
+      z-index: -1;
+      background: attr(--background);
+      position: absolute;
+      content: "";
+      opacity: 0.2;
+      filter: blur(1rem);
+      transition: opacity .15s ease-in-out;
+    }
+  }
+}

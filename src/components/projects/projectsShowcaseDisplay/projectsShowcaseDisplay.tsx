@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Link from 'next/link';
 
 // mantine
 import { createStyles } from '@mantine/styles';
@@ -9,10 +10,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 // types
 import type { ShowcaseProjectFrontmatter } from '@/types/markdownFrontmatter';
 
+// styles
+import scssClasses from './projectsShowcaseDisplay.module.scss';
+
 // components
 import Button from '@/subcomponents/button';
 import TechnologiesRow from '@/subcomponents/technologiesRow';
-import Link from 'next/link';
 
 // styles
 const useStyles = createStyles((t) => ({
@@ -192,37 +195,10 @@ const ProjectsShowcaseDisplay = ({ projects }: Props) => {
                     <p className={classes.itemInfoDescription}>{shortInfo}</p>
                     <TechnologiesRow technologies={mainTechnologies} />
                     <div>
-                      <Link passHref href={'/showcase/' + id} legacyBehavior>
+                      <Link href={'/showcase/' + id}>
                         <Button
-                          sx={(t) => ({
-                            background: background.colorful,
-                            color: t.black,
-                            position: 'relative',
-                            overflow: 'visible',
-                            ['&:hover']: {
-                              transform: 'translate(0rem, -.2rem)',
-                              ['&::after']: {
-                                opacity: 0.75
-                              }
-                            },
-                            ['&:active']: {
-                              transform: 'translate(0rem, -.4rem)'
-                            },
-                            ['&::after']: {
-                              left: '-.5rem',
-                              top: '-.5rem',
-                              width: 'calc(100% + 1rem)',
-                              height: 'calc(100% + 1rem)',
-                              background: background.colorful,
-                              zIndex: -1,
-                              position: 'absolute',
-                              content: '""',
-                              opacity: 0.2,
-                              filter: 'blur(1rem)',
-                              transition: 'opacity .15s ease-in-out'
-                            }
-                          })}
-                          component='a'>
+                          className={scssClasses._btnHighlighted}
+                          style={{ background: background.colorful }}>
                           Read more
                         </Button>
                       </Link>
@@ -291,7 +267,7 @@ const ProjectsShowcaseDisplay = ({ projects }: Props) => {
         </figure>
       </div>
     </motion.section>
-  ); 
+  );
 };
 
 export default ProjectsShowcaseDisplay;

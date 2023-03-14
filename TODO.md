@@ -21,4 +21,5 @@
 - [ ] Transition to use APP directory
   - [ ] Removing Mantine/Emotion
     - [x] Global Stylings
+    - [x] Updated Button sub-component
     - [ ] Gradual transition from CSS in JS to SCSS

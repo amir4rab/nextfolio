@@ -311,7 +311,8 @@ const GhDisplay = ({ ghData }: Props) => {
                     style={{ justifyContent: 'flex-end' }}>
                     <Button
                       onClick={() => setItemCount((curr) => curr + 4)}
-                      sx={(t) => ({ fontSize: t.fontSizes.xs })}>
+                      style={{ fontSize: 'var(--font-xs)' }}
+                    >
                       Click here
                     </Button>
                   </footer>

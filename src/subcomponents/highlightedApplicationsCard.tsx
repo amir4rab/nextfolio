@@ -177,10 +177,8 @@ const InnerCard = ({
         <div className={classes.cardDetails}>
           <p className={classes.cardTitle}>{name}</p>
           <p>{shortInfo}</p>
-          <Link href={`/showcase/${id}`} passHref legacyBehavior>
-            <Button component='a' sx={(t) => ({ fontSize: t.fontSizes.xs })}>
-              Read more
-            </Button>
+          <Link href={`/showcase/${id}`}>
+            <Button style={{ fontSize: 'var(--text-xs)' }}>Read more</Button>
           </Link>
         </div>
       </motion.div>
