@@ -1,0 +1,59 @@
+@layer component {
+  .carousel {
+    position: relative;
+    width: 100%;
+    height: 40vh;
+  }
+  .imageWrapper {
+    position: absolute;
+    left: 50%;
+    top: 0%;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    pointer-events: none
+  }
+  .image {
+    object-fit: contain;
+    width: 100%;
+    max-height: 100%
+  }
+  .rightButton {
+    right: 1rem
+  };
+  .leftButton {
+    left: 1rem
+  };
+}
+
+@layer customized {
+  .button {
+    z-index: 5;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    padding: var(--spacing-xs);
+    border-radius: 50%;
+    &:hover {
+      transform: translate(0, calc(-50% - .05rem));
+      background: var(--background-3);
+    }
+    &:active {
+      transform: translate(0, calc(-50% - .1rem));
+      background: var(--background-4);
+    };
+    &:disabled {
+      opacity: 0
+    }
+  }
+}
+
+
+
