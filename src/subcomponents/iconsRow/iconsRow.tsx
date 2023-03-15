@@ -1,16 +1,17 @@
-import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
+import {
+  ReactNode,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  CSSProperties
+} from 'react';
 
 // react-icons
 import type { IconType } from 'react-icons';
 
 // mantine
-import {
-  createStyles,
-  keyframes,
-  CSSObject,
-  MantineTheme,
-  useMantineTheme
-} from '@mantine/styles';
+import classes from './iconsRow.module.scss';
 
 export interface IconsRowProps {
   stopOnHover?: boolean;
@@ -22,62 +23,6 @@ export interface IconsRowProps {
     href: string;
   }[];
 }
-
-// keyframes
-const animateIn = keyframes({
-  from: {
-    opacity: 0,
-    transform: `translate(0, -.25rem)`
-  },
-  to: {
-    opacity: 1,
-    transform: `translate(0, 0)`
-  }
-});
-
-// styles
-const useStyles = createStyles((t) => ({
-  iconsRow: {
-    margin: `${t.spacing.xl}px 0`,
-    animation: `${animateIn} .3s ease-in forwards`
-  },
-  title: {
-    marginBottom: t.spacing.xs,
-    fontSize: t.fontSizes.sm
-  },
-  iconsWrapper: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    overflow: 'hidden',
-    position: 'relative',
-    height: '4rem',
-    width: '100%'
-  },
-  icon: {
-    left: '-3.125rem',
-    width: '2.5rem',
-    height: '2.5rem',
-    top: '50%',
-    position: 'absolute',
-    color: t.colorScheme === 'dark' ? t.white : t.black,
-    opacity: 0.5,
-    fontSize: '2rem',
-    transition: 'opacity .3s ease-in-out, color .15s ease-in-out',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    ['&:not(:last-of-type)']: {
-      marginRight: '.25rem'
-    },
-    ['&:hover']: {
-      opacity: 1,
-      color: t.primaryColor
-    }
-  },
-  iconPaused: {
-    animationPlayState: 'paused !important'
-  }
-}));
 
 /** Calculates amount of delay needed for equal padding between items */
 const getTiming = (
@@ -99,42 +44,21 @@ const getTiming = (
   return parseFloat(durationNeededForPadding.toFixed(2));
 };
 
-const useIconStyles = createStyles((t, styles?: CSSObject) => ({
-  wrapper: {
-    display: 'block',
-    [t.fn.largerThan('md')]: {
-      animationDuration: '20s'
-    },
-    [t.fn.smallerThan('md')]: {
-      animationDuration: '10s'
-    },
-    ...styles
-  }
-}));
-
 interface IconWrapperProps {
   href?: string;
   key?: string | number;
+  style?: CSSProperties;
   className: string;
   children: ReactNode;
-  styles: (t: MantineTheme) => CSSObject;
 }
 
-const IconWrapper = ({
-  styles,
-  className,
-  children,
-  ...props
-}: IconWrapperProps) => {
-  const t = useMantineTheme();
-  const { classes, cx } = useIconStyles(styles(t));
-
+const IconWrapper = ({ children, ...props }: IconWrapperProps) => {
   return (
     <a
       {...props}
       target='_blank'
       rel='noreferrer'
-      className={cx(className, classes.wrapper)}>
+      className={[classes.iconWrapper, classes.icon].join(' ')}>
       {children}
     </a>
   );
@@ -147,7 +71,6 @@ const IconsRow = ({
   stopOnHover = true,
   sidePadding = 3.125
 }: IconsRowProps) => {
-  const { classes, cx } = useStyles();
   const [hovered, setHovered] = useState(false);
   const [delayLength, setDelayLength] = useState<null | number>(null);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -161,8 +84,10 @@ const IconsRow = ({
     wrapperWidth.current = width;
 
     const delay = getTiming(icons.length, width, isDesktop, sidePadding);
-
     setDelayLength(delay);
+
+    wrapperRef.current.style.setProperty('--el-width', `${width}px`);
+    wrapperRef.current.style.setProperty('--side-padding', `${sidePadding}rem`);
   }, [icons.length, sidePadding]);
 
   useEffect(() => {
@@ -181,6 +106,7 @@ const IconsRow = ({
     <div ref={wrapperRef} className={classes.iconsRow}>
       <p className={classes.title}>{title}</p>
       <div
+        data-hidden={delayLength === 0}
         onMouseEnter={() => stopOnHover && setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         className={classes.iconsWrapper}>
@@ -188,24 +114,12 @@ const IconsRow = ({
           icons.map(({ icon, href }, i) => {
             const I = icon;
 
-            const slidingAnimation = keyframes({
-              '0%': {
-                transform: `translate(-${sidePadding}rem, -50%)`
-              },
-              '100%': {
-                transform: `translate(calc( ${wrapperWidth.current}px + ${sidePadding}rem), -50%)`
-              }
-            });
-
             return (
               <IconWrapper
                 href={linker ? href : undefined}
                 key={i}
-                styles={() => ({
-                  animation: `${slidingAnimation} linear forwards infinite`,
-                  animationDelay: `${i * delayLength}s`
-                })}
-                className={cx(classes.icon, hovered && classes.iconPaused)}>
+                style={{ animationDelay: `${i * delayLength}s` }}
+                className={[hovered && classes.iconPaused].join(' ')}>
                 <I />
               </IconWrapper>
             );

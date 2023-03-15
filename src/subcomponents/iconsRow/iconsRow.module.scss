@@ -1,0 +1,77 @@
+@import '../../scss/styles.scss';
+
+@keyframes animateIn {
+  from {
+    opacity: 0;
+    transform: translate(0, -.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+@layer component {
+  .iconsRow {
+    --el-width: 0px;
+    --side-padding: 0px;
+    margin: var(--spacing-xl) px 0;
+    animation: animateIn .3s ease-in forwards;
+    [data-hidden=true] {
+      display: none;
+    }
+  }
+  .title {
+    margin-bottom: var(--spacing-xs);
+    font-size: var(--font-sm)
+  }
+  .iconsWrapper {
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+    position: relative;
+    height: 4rem;
+    width: 100%
+  }
+  .icon {
+    left: -3.125rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    top: 50%;
+    position: absolute;
+    color: var(--primary-color-0);
+    opacity: 0.5;
+    font-size: 2rem;
+    transition: opacity .3s ease-in-out, color .15s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:not(:last-of-type) {
+      margin-right: .25rem
+    }
+    &:hover {
+      opacity: 1;
+      color: var(--primary-color-0)
+    }
+    @keyframes animate {
+      0% {
+        transform: translate(calc(var(--side-padding) * -1 ), -50%)
+      }
+      100% {
+        transform: translate(calc(var(--el-width) + var(--side-padding)), -50%)
+      }
+    };
+    animation: animate linear forwards infinite;
+  }
+  .iconPaused {
+    animation-play-state: paused !important
+  }
+  .iconWrapper {
+    display: block;
+    @include while-desktop {
+      animation-duration: 20s
+    }
+    @include while-mobile {
+      animation-duration: 10s
+    }
+  }
+}

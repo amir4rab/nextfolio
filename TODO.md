@@ -24,4 +24,5 @@
     - [x] Updated Button sub-component
     - [x] Updated Next Links
     - [x] Updated GhDisplay
+    - [x] Updated IconsRow
     - [ ] Gradual transition from CSS in JS to SCSS
