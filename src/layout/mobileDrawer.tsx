@@ -80,9 +80,8 @@ const useStyles = createStyles((t) => ({
     }
   },
   navButton: {
-    ['&:not(:last-of-type)']: {
-      marginBottom: '.5rem'
-    },
+    width: '100%',
+    marginBottom: '.5rem',
     ['&[data-active]']: {
       background: t.primaryColor,
       color: t.black
