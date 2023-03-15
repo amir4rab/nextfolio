@@ -6,8 +6,8 @@
 - [x] Project Page
 - [x] Blogs Page
   - [x] Blog footer
-  - [] search
-  - [] pagination
+  - [ ] search
+  - [ ] pagination
 - [x] Markdown Wrapper
 - [x] Error pages ( inc: 404 and 500 )
 - [x] Mobile Navbar
@@ -23,4 +23,5 @@
     - [x] Global Stylings
     - [x] Updated Button sub-component
     - [x] Updated Next Links
+    - [x] Updated GhDisplay
     - [ ] Gradual transition from CSS in JS to SCSS

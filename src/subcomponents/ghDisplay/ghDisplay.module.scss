@@ -1,0 +1,154 @@
+@import '../../scss/styles.scss';
+
+@keyframes animateIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@layer component {
+  .ghDisplay {
+    margin: 10vh 0;
+    animation: animateIn .5s ease-in-out forwards;
+    color: var(--text-primary-0);
+  }
+  .title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: var(--font-xl);
+    & svg {
+      margin-right: .5rem
+    }
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    @include while-desktop() {
+      flex-direction: row
+    }
+  }
+  .socialStats {
+    display: flex;
+    justify-content: flex-end;
+    @include while-mobile() {
+      flex-direction: column
+    }
+  }
+  .socialStatsItem {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: var(--spacing-md);
+    font-size: var(--font-sm);
+    align-items: center;
+    align-content: center;
+    color: var(--text-primary-0);
+    @include while-desktop() {
+      flex-direction: row;
+      margin-top: 0;
+      &:not(:last-of-type) {
+        margin-right: var(--spacing-xl)
+      }
+    }
+    & svg {
+      font-size: var(--font-xl)
+    };
+    & p:first-of-type {
+      margin-left: .5rem
+    };
+    & span {
+      opacity: 0.5
+    };
+    & a {
+      color: var(--text-primary-0);
+      text-decoration: none
+    }
+  }
+  .cardWrapper {
+    margin-top: 2.5vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    @include while-mobile() {
+      grid-template-columns: repeat(1, 1fr)
+    }
+    @include while-desktop() {
+      grid-template-columns: repeat(3, 1fr)
+    }
+  }
+  .card {
+    padding: calc(var(--spacing-xl) * 1.25);
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius-lg);
+    color: var(--text-primary-0);
+    background: var(--background-1);
+    box-shadow: var(--shadow-md);
+    @include while-desktop() {
+      opacity: 0.75;
+      transition: transform .15s ease-in-out, opacity .15s ease-in-out;
+      &:hover {
+        transform: translate(0, -.1rem);
+        opacity: 1 !important;
+      }
+    }
+  }
+  .cardTitle {
+    margin-bottom: var(--spacing-xl);
+    font-size: va(--font-sm);
+    font-Weight: 600
+  }
+  .cardDescription {
+    font-size: var(--font-md);
+    margin-bottom: var(--spacing-md)
+  }
+  .cardFooter {
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: flex-end;
+    flex-grow: 1;
+    line-height: 100%;
+    font-size: var(--font-sm);
+    font-family: monospace;
+  }
+  .langColorWrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-right: var(--spacing-xs);
+    & p {
+      margin-left: var(--spacing-xs);
+    }
+  }
+  .langColor {
+    display: flex;
+    border-radius: 50%;
+    width: .75rem;
+    height: .75rem;
+  }
+  .starsWrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    margin-right: var(--spacing-md);
+    & svg {
+      color: var(--highlight-0);
+    }
+    & p {
+      font-size: var(--font-m);
+      margin-right: calc(var(--spacing-xs) * 0.5);
+    }
+  }
+  .openRepo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    color: var(--text-2);
+    &:hover {
+      color: var(--highlight-0);
+    }
+  }
+}
