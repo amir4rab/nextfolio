@@ -25,4 +25,5 @@
     - [x] Updated Next Links
     - [x] Updated GhDisplay
     - [x] Updated IconsRow
+    - [x] Updated HighlightedApplicationsCard
     - [ ] Gradual transition from CSS in JS to SCSS
