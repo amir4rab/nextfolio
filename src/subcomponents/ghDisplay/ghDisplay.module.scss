@@ -9,7 +9,7 @@
   .ghDisplay {
     margin: 10vh 0;
     animation: animateIn .5s ease-in-out forwards;
-    color: var(--text-primary-0);
+    color: var(--text-0);
   }
   .title {
     display: flex;
@@ -42,7 +42,7 @@
     font-size: var(--font-sm);
     align-items: center;
     align-content: center;
-    color: var(--text-primary-0);
+    color: var(--text-0);
     @include while-desktop() {
       flex-direction: row;
       margin-top: 0;
@@ -60,7 +60,7 @@
       opacity: 0.5
     };
     & a {
-      color: var(--text-primary-0);
+      color: var(--text-0);
       text-decoration: none
     }
   }
@@ -81,7 +81,7 @@
     display: flex;
     flex-direction: column;
     border-radius: var(--radius-lg);
-    color: var(--text-primary-0);
+    color: var(--text-0);
     background: var(--background-1);
     box-shadow: var(--shadow-md);
     @include while-desktop() {
