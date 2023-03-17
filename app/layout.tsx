@@ -1,6 +1,9 @@
 import '@/styles/styles.global.scss';
 import Layout from '@/layout';
 
+// providers
+import { ThemeProvider } from '@/providers/themeProvider';
+
 const domain = 'https://amir4rab.com';
 const title = 'Amir4rab';
 const description = 'Front-end engineer, interested in Web and UI';
@@ -58,8 +61,10 @@ export default function RootLayout({
   return (
     <html lang='en' data-color-scheme='dark'>
       <body>
-        <Layout>{children}</Layout>
-        <div id='mobileNav' />
+        <ThemeProvider>
+          <Layout>{children}</Layout>
+          <div id='mobileNav' />
+        </ThemeProvider>
       </body>
     </html>
   );
