@@ -1,0 +1,37 @@
+@layer component {
+  .toggle {
+    position: relative;
+    display: inline-block;
+    label {
+      font-size: 0;
+      color: transparent;
+      user-select: none;
+      display: block;
+      background: var(--background-1);
+      border: .1rem solid var(--background-4);
+      border-radius: 10rem;
+      &::after {
+        left: 0;
+        top: 0;
+        z-index: 10;
+        width: 50%;
+        height: 100%;
+        border-radius: 100%;
+        background: var(--text-0);
+        display: block;
+        content: '';
+        transition: transform .2s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      transition: background .2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    input {
+      display: none;
+    }
+    input:checked + label {
+      background: var(--highlight-0);
+      &::after {
+        transform: translateX(100%);
+      }
+    }
+  }
+}
