@@ -1,5 +1,10 @@
 [![CodeQl checks](https://github.com/amir4rab/nextfolio/actions/workflows/codeql.yml/badge.svg)](https://github.com/amir4rab/nextfolio/actions/workflows/codeql.yml)
 
+## Deployed instances
+
+Stable version [amir4rab.com](https://amir4rab.com) <br>
+Development version [next.amir4rab.com](https://next.amir4rab.com)
+
 ## Requirements
 
 ### Development
