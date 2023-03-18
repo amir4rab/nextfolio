@@ -4,7 +4,7 @@ import { ReactNode, useState } from 'react';
 import { GhStats } from '@/utils/backend/getGhStats';
 
 // mantine
-import { useMediaQuery } from '@mantine/hooks';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 // styles
 import classes from './ghDisplay.module.scss';
