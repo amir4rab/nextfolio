@@ -12,9 +12,9 @@
       top: calc(-4vh - var(--spacing-xs));
     }
   }
-  .nav, .itemHoverExtension {
-    -webkit-backdrop-filter: blur(1rem);
-    backdrop-filter: blur(1rem);
+  .nav{
+    -webkit-backdrop-filter: blur(10rem);
+    backdrop-filter: blur(10rem); 
     box-shadow: 0 0 .5rem 0 var(--background-1);
     background: var(--background-1-75);
   }
@@ -120,6 +120,7 @@
     }
   }
   
+  // Disabling background blur do to some strange bug in chromium browsers
   .itemHoverExtension {
     border-radius: var(--radius-md);
     border: .1rem solid var(--background-4);
@@ -127,7 +128,8 @@
     overflow: hidden;
     color: var(--text-1);
     font-size: var(--font-sm);
-    z-index: 10;
+    z-index: 100;
+    background: var(--background-1);
   }
 
   .settingsRow {

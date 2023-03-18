@@ -70,19 +70,6 @@ const HoverFollower = () => {
     };
   }, [hoverElStyles.opacity, wrapperHovering, hoveredElStats]);
 
-  // useEffect(() => {
-  //   if (
-  //     hoverElStyles.transform !== '' ||
-  //     typeof firstEl.current === 'undefined'
-  //   )
-  //     return;
-
-  //   setHoverElStyles((per) => ({
-  //     ...per,
-  //     transform: `translate(${pos.x}px, ${pos.y}px)`
-  //   }));
-  // }, [hoverElStyles.transform]);
-
   return (
     <div
       className={classes.hoverEl}
