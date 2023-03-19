@@ -1,5 +1,7 @@
+import Home from '@/components/home';
+
 const IndexPage = () => {
-  return <h1>Hello world</h1>;
+  return <Home />;
 };
 
 export default IndexPage;
