@@ -10,12 +10,7 @@ import DesktopNavbar from './desktopNavbar';
 import MobileNavbar from './mobileNavbar/mobileNavbar';
 
 // icons
-import {
-  IoFolderOpen,
-  IoHome,
-  IoInformationCircle,
-  IoSettings
-} from 'react-icons/io5';
+import { IoFolderOpen, IoInformationCircle, IoSettings } from 'react-icons/io5';
 
 interface Props {
   children: ReactNode;
@@ -38,7 +33,6 @@ const Layout = ({ children }: Props) => {
         {children}
       </main>
       <MobileNavbar>
-        <MobileNavbar.Item href='/' title='Home' icon={<IoHome />} />
         <MobileNavbar.Item
           href='/about'
           title='About'
