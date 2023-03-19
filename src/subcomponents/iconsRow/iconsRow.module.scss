@@ -38,7 +38,7 @@
     height: 2.5rem;
     top: 50%;
     position: absolute;
-    color: var(--primary-color-0);
+    color: var(--text-0);
     opacity: 0.5;
     font-size: 2rem;
     transition: opacity .3s ease-in-out, color .15s ease-in-out;
@@ -50,7 +50,7 @@
     }
     &:hover {
       opacity: 1;
-      color: var(--primary-color-0)
+      color: var(--highlight-0)
     }
     @keyframes animate {
       0% {
@@ -68,7 +68,7 @@
   .iconWrapper {
     display: block;
     @include while-desktop {
-      animation-duration: 20s
+      animation-duration: 22s
     }
     @include while-mobile {
       animation-duration: 10s

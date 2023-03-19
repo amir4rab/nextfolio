@@ -15,7 +15,7 @@ import classes from './iconsRow.module.scss';
 
 export interface IconsRowProps {
   stopOnHover?: boolean;
-  title?: string;
+  title?: string | boolean;
   linker?: boolean;
   sidePadding?: number;
   icons: {
@@ -66,7 +66,7 @@ const IconWrapper = ({ children, ...props }: IconWrapperProps) => {
 
 const IconsRow = ({
   icons,
-  title = 'Experienced with',
+  title,
   linker = true,
   stopOnHover = true,
   sidePadding = 3.125
@@ -104,7 +104,11 @@ const IconsRow = ({
 
   return (
     <div ref={wrapperRef} className={classes.iconsRow}>
-      <p className={classes.title}>{title}</p>
+      {title !== false && (
+        <p className={classes.title}>
+          {typeof title !== 'undefined' ? title : 'Experienced with'}
+        </p>
+      )}
       <div
         data-hidden={delayLength === 0}
         onMouseEnter={() => stopOnHover && setHovered(true)}
