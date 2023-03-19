@@ -1,36 +1,49 @@
-@layer component {
-  ._btn {
-    background: var(--background-1);
-    color: var(--text-0);
-    padding: calc(var(--spacing-md) * 0.75) calc(var(--spacing-lg) * 1.25);
-    font-weight: 600;
-    font-size: var(--font-sm);
-    border: none;
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    transition: transform .1s ease-in-out, background-color .1s ease-in-out;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
+._btn {
+  background: var(--background-1);
+  color: var(--text-0);
+  padding: calc(var(--spacing-md) * 0.75) calc(var(--spacing-lg) * 1.25);
+  font-weight: 600;
+  font-size: var(--font-sm);
+  border: none;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: transform .1s ease-in-out, background-color .1s ease-in-out;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: center;
+  
+  &:hover {
+    transform: translate(0, -.05rem);
+    background: var(--background-2);
+  };
+  &:active {
+    transform: translate(0, -.1rem);
+    background: var(--background-3);
+  };
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
     &:hover {
-      transform: translate(0, -.05rem);
-      background: var(--background-2);
+      transform: none;
+      background: var(--background-1);
     };
     &:active {
-      transform: translate(0, -.1rem);
-      background: var(--background-3);
-    };
-    &:disabled {
-      opacity: 0.5;
-      cursor: default;
-      &:hover {
-        transform: none;
-        background: var(--background-1);
-      };
-      &:active {
-        transform: none;
-        background: var(--background-1);
-      }
+      transform: none;
+      background: var(--background-1);
+    }
+  }
+  &[data-no-radius] {
+    border-radius: 0;
+  }
+  span {
+    &:not(:first-child) {
+      margin-left: var(--spacing-xs);
+    }
+    &:not(:last-child) {
+      margin-right: var(--spacing-xs);
     }
   }
 }

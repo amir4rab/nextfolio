@@ -6,12 +6,14 @@ import classes from './button.module.scss';
 
 export interface ButtonProps {
   disabled?: boolean;
-  children: ReactNode;
+  children?: ReactNode;
   onClick?: MouseEventHandler;
   className?: string;
   style?: CSSProperties;
   type?: 'button' | 'link';
   href?: string;
+  rightIcon?: ReactNode;
+  leftIcon?: ReactNode;
 }
 
 const Button = ({
@@ -19,18 +21,24 @@ const Button = ({
   href,
   className,
   type = 'button',
+  rightIcon,
+  leftIcon,
   ...props
 }: ButtonProps) => {
   return type === 'button' ? (
-    <button className={[classes._btn, className].join(' ')} {...props}>
-      {children}
+    <button className={[className, classes._btn].join(' ')} {...props}>
+      {leftIcon && leftIcon}
+      <span>{children}</span>
+      {rightIcon && rightIcon}
     </button>
   ) : (
     <Link
       href={href ? href : '#'}
-      className={[classes._btn, className].join(' ')}
+      className={[className, classes._btn].join(' ')}
       {...props}>
-      {children}
+      {leftIcon && leftIcon}
+      <span>{children}</span>
+      {rightIcon && rightIcon}
     </Link>
   );
 };
