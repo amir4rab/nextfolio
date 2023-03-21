@@ -3,6 +3,7 @@ import Layout from '@/layout';
 
 // providers
 import { ThemeProvider } from '@/providers/themeProvider';
+import { DataProvider } from '@/providers/dataProvider';
 
 const domain = 'https://amir4rab.com';
 const title = 'Amir4rab';
@@ -61,10 +62,13 @@ export default function RootLayout({
   return (
     <html lang='en' data-color-scheme='dark'>
       <body>
-        <ThemeProvider>
-          <Layout>{children}</Layout>
-          <div id='mobileNav' />
-        </ThemeProvider>
+        <DataProvider>
+          <ThemeProvider>
+            <Layout>{children}</Layout>
+          </ThemeProvider>
+        </DataProvider>
+        <div id='__blob' />
+        <dialog id='__mobileMenu' />
       </body>
     </html>
   );
