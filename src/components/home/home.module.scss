@@ -1,10 +1,11 @@
 @import '../../scss/styles.scss';
 
 .hero {
-  height: 55vh;
-  padding: 10vh 0;
+  padding: 5vh 0;
   position: relative;
-  margin-bottom: calc(10vh + var(--spacing-xl) * 2);
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
 
   .title {
     @include while-desktop () {
@@ -33,9 +34,11 @@
   }
 
   .actions {
-    position: absolute;
-    right: 0;
-    bottom: 0;
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-end;
+    align-items: flex-end;
+    align-content: flex-end;
 
     .actionLink {
       transform: none;

@@ -2,24 +2,53 @@
 
 import dynamic from 'next/dynamic';
 
-// styles
 import classes from './home.module.scss';
 
-// subcomponents
 import Button from '@/subcomponents/button';
 
-// lazy subcomponents
 const XpRow = dynamic(() => import('./xpRow'));
 
-// icons
 import { IoOpenOutline } from 'react-icons/io5';
 
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
+
+import { useInView } from 'react-intersection-observer';
+
+import { useData } from '@/providers/dataProvider';
 
 const Home = () => {
+  const { setFloatingActions } = useData();
+  const { ref, inView } = useInView({
+    threshold: 0.15
+  });
+
+  useEffect(() => {
+    inView
+      ? setFloatingActions({
+          id: 'hero-cta',
+          actions: [
+            {
+              content: 'Contact',
+              type: 'anchor',
+              href: '/contact',
+              primary: true,
+              key: 'contact-cta'
+            },
+            {
+              content: 'About',
+              type: 'anchor',
+              href: '/about',
+              primary: false,
+              key: 'about-cta'
+            }
+          ]
+        })
+      : setFloatingActions((curr) => (curr?.id === 'hero-cta' ? null : curr));
+  }, [inView, setFloatingActions]);
+
   return (
     <div className={classes.home}>
-      <section className={classes.hero}>
+      <section ref={ref} className={classes.hero}>
         <h1 className={classes.title}>
           <span data-highlighted>{'FRONTEND '}</span>
           <span>WEB DEVELOPER</span>
@@ -49,11 +78,10 @@ const Home = () => {
           </Button>
         </div>
       </section>
-      <section className={classes.experiences}>
-        <Suspense fallback={null}>
-          <XpRow />
-        </Suspense>
-      </section>
+      <Suspense fallback={null}>
+        <XpRow />
+      </Suspense>
+      <div style={{ height: '100vh' }} />
     </div>
   );
 };
