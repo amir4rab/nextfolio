@@ -1,22 +1,27 @@
 'use client';
 
-import type { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
+import dynamic from 'next/dynamic';
 
 // styles
 import classes from './styles.module.scss';
 
 // subcomponents
 import DesktopNavbar from './desktopNavbar';
-import MobileNavbar from './mobileNavbar/mobileNavbar';
+const MobileNavbar = dynamic(() => import('./mobileNavbar/mobileNavbar'), {
+  ssr: false
+});
 
 // icons
-import { IoFolderOpen, IoInformationCircle, IoSettings } from 'react-icons/io5';
+import useBlob from './useBlob';
 
 interface Props {
   children: ReactNode;
 }
 
 const Layout = ({ children }: Props) => {
+  useBlob();
+
   return (
     <>
       <DesktopNavbar
@@ -32,23 +37,9 @@ const Layout = ({ children }: Props) => {
       <main style={{ height: '300vh' }} id='__main' className={classes.main}>
         {children}
       </main>
-      <MobileNavbar>
-        <MobileNavbar.Item
-          href='/about'
-          title='About'
-          icon={<IoInformationCircle />}
-        />
-        <MobileNavbar.Item
-          href='/projects'
-          title='Projects'
-          icon={<IoFolderOpen />}
-        />
-        <MobileNavbar.Item
-          href='/settings'
-          title='Settings'
-          icon={<IoSettings />}
-        />
-      </MobileNavbar>
+      <Suspense fallback={null}>
+        <MobileNavbar />
+      </Suspense>
     </>
   );
 };

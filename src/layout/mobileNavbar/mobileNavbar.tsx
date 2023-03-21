@@ -1,70 +1,79 @@
 'use client';
 
 import { ReactNode, Suspense, useState } from 'react';
+import { createPortal } from 'react-dom';
+import Link from 'next/link';
 
 // next
 import dynamic from 'next/dynamic';
-import { usePathname } from 'next/navigation';
 
 // styles
 import classes from './mobileNavbar.module.scss';
 
 // subcomponents
 import Button from '@/subcomponents/button';
-
-// lazy subcomponents
-const TopRow = dynamic(() => import('./topRow'));
+const NavbarDialog = dynamic(() => import('./dialog'), { ssr: false });
 
 // icons
-import { IoHome, IoMenu, IoSettings } from 'react-icons/io5';
-import Settings from './settings';
+import { IoChevronUp } from 'react-icons/io5';
 
-const MobileNavbar = ({ children }: { children: ReactNode }) => {
-  const [activeItem, setActiveItem] = useState<string | null>(null);
+// global context
+import { useData } from '@/providers/dataProvider';
+
+// framer
+import { AnimatePresence, motion } from 'framer-motion';
+
+const MobileNavbar = () => {
+  const { floatingActions } = useData();
+  const [expanded, setExpanded] = useState(false);
 
   return (
-    <nav data-expanded={activeItem !== null} className={classes.mobileNav}>
-      <Suspense>
-        <TopRow
-          activeItem={activeItem}
-          items={[
-            {
-              content: children,
-              id: 'navigation'
-            },
-            {
-              content: <Settings />,
-              id: 'settings'
-            }
-          ]}
-        />
+    <>
+      <Suspense fallback={null}>
+        {createPortal(
+          <NavbarDialog displayed={expanded} setDisplayed={setExpanded} />,
+          document.body
+        )}
       </Suspense>
-      <div className={classes.bottomRow}>
-        <Button data-main className={classes.navLink} type='link' href='/'>
-          <IoHome size='16' />
-        </Button>
-        <Button
-          data-main
-          className={classes.navLink}
-          data-active={activeItem === 'navigation'}
-          onClick={() =>
-            setActiveItem((curr) =>
-              curr === 'navigation' ? null : 'navigation'
-            )
-          }>
-          <IoMenu size='16' />
-        </Button>
-        <Button
-          data-main
-          className={classes.navLink}
-          data-active={activeItem === 'settings'}
-          onClick={() =>
-            setActiveItem((curr) => (curr === 'settings' ? null : 'settings'))
-          }>
-          <IoSettings size='16' />
-        </Button>
-      </div>
-    </nav>
+      <nav className={classes.mobileNav}>
+        <AnimatePresence>
+          {floatingActions && (
+            <motion.div
+              key={floatingActions.id}
+              transition={{ duration: 0.15 }}
+              initial={{ opacity: 0, width: 0 }}
+              animate={{ opacity: 1, width: 'auto' }}
+              exit={{ opacity: 0, width: 0 }}
+              className={classes.floatingActionsWrapper}>
+              {floatingActions.actions.map((action) => {
+                const { type, content, key, primary } = action;
+
+                return type === 'button' ? (
+                  <motion.button
+                    data-primary={primary}
+                    onClick={action.payload}
+                    key={key}>
+                    {content}
+                  </motion.button>
+                ) : (
+                  <motion.div key={key}>
+                    <Link data-primary={primary} href={action.href}>
+                      {content}
+                    </Link>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <button
+          onClick={() => setExpanded((curr) => !curr)}
+          data-round
+          className={classes.floatingAction}>
+          <IoChevronUp />
+        </button>
+      </nav>
+    </>
   );
 };
 
@@ -77,14 +86,8 @@ const Item = ({
   href: string;
   icon?: ReactNode;
 }) => {
-  const pathname = usePathname();
-
   return (
-    <Button
-      className={classes.navLink}
-      data-active={pathname === href}
-      type='link'
-      href={href}>
+    <Button type='link' href={href}>
       {icon}
       <span className={classes.text}>{title}</span>
     </Button>
