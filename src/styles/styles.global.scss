@@ -9,3 +9,40 @@
     color: var(--text-0);
   }
 }
+
+@layer component {
+  html[data-color-scheme=dark] body #__blob {
+    --blob-color-s: rgba(var(--pink-3-rgb), 0.25);
+    --blob-color-e: rgba(var(--pink-3-rgb),0)
+  }
+
+  html[data-color-scheme=light] body #__blob {
+    --blob-color-s: rgba(var(--pink-5-rgb), 0.4);
+    --blob-color-e: rgba(var(--pink-5-rgb), 0)
+  }
+
+  #__blob {
+    @keyframes breath {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: .85;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -100;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    user-select: none;
+    background: radial-gradient(circle at var(--pos-x, 0%) var(--pos-y, 100%),  var(--blob-color-s), var(--blob-color-e) 50%);
+    animation: breath 3s ease-in-out 0s infinite;
+  }
+}
