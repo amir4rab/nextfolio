@@ -17,7 +17,7 @@
   }
 
   opacity: 0;
-  animation: animate-in forwards .15s ease-in-out;
+  animation: animate-in forwards .15s cubic-bezier(.9, 0, .1, 1);
   position: fixed;
   bottom: var(--spacing-md);
   left: var(--spacing-md);
@@ -36,11 +36,12 @@
     justify-content: center;
     padding: var(--spacing-md) var(--spacing-xl);
     white-space: nowrap;
+    height: 100%;
   }
   
   .floatingActionsWrapper, .floatingAction {
     height: 3rem;
-    background: var(--background-0-50);
+    background: var(--background-1);
     -webkit-backdrop-filter: blur(1rem);
     backdrop-filter: blur(1rem);
     border: none;
@@ -59,7 +60,7 @@
       text-decoration: none;
       background: transparent;
       border: none;
-      transition: background .3s ease-in-out;
+      transition: background .3s cubic-bezier(.9, 0, .1, 1);
       &:active {
         background: var(--highlight-0-50);
       }
@@ -73,7 +74,7 @@
   .floatingAction {
     padding: var(--spacing-md);
     width: 3rem;
-    transition: background .15s ease-in-out, border-radius .1s ease-in-out;
+    transition: background .15s cubic-bezier(.9, 0, .1, 1), border-radius .1s cubic-bezier(.9, 0, .1, 1);
     &:active {
       background: var(--highlight-0-50);
     }
@@ -81,8 +82,6 @@
       border-radius: 50%;
     }
     border-radius: 0 50% 50% 0;
-    
-    margin-left: calc(var(--spacing-xs)/2);
   }
 }
 
@@ -112,48 +111,45 @@
   margin: auto auto var(--spacing-md) auto;
 
   width: calc(100vw - var(--spacing-md) * 2);
-  background: var(--background-0-75);
-  border: var(--background-4) .1rem solid;
-  border-radius: var(--radius-lg);
+  background: transparent;
+  border: none;
   
   position: fixed;
   inset: 0;
   transition: opacity 1s ease;
   
-  .controls {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    align-content: center;
-    button {
-      flex-grow: 1;
-      background: var(--background-4);
-      color: var(--text-0);
-      border: none;
-      padding: var(--spacing-xs) var(--spacing-lg);
-      font-size: var(--font-xs);
-      transition: color .15s ease-in-out, background .15s ease-in-out;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      &:active {
-        color: var(--highlight-0);
-      }
-      &[data-active=true] {
-        background: var(--highlight-0);
-        color: var(--background-0);
-      }
+  
+  .gridRow {
+    display: grid;
+    grid-template-columns: 20vw 20vw 20vw 20vw;
+    --grid-gap-spacing:  calc(calc(20vw - var(--spacing-lg) * 2) / 3);
+    grid-gap: var(--grid-gap-spacing);
+    &:not(:last-child) {
+      margin-bottom: var(--grid-gap-spacing);
     }
   }
-  
-  .contents {
-    padding: var(--spacing-md) var(--spacing-xl);
+
+  .actionEl {
+    border-radius: calc(var(--radius-lg) * 1.5);
+    background: var(--background-0-50);
+    font-size: 8vw;
+    width: 20vw;
+    height: 20vw;
+    border: none;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-0);
+    &[data-active=true] {
+      background: var(--text-5-50);
+    }
   }
 
   &[data-closing=true]{
     pointer-events: none;
     opacity: 0;
-    animation: animate-dialog-out forwards .15s ease;
+    animation: animate-dialog-out forwards .15s cubic-bezier(.9, 0, .1, 1);
     &::backdrop {
       opacity: 0;
       pointer-events: none;
@@ -161,14 +157,14 @@
   }
 
   &[open]:not([data-closing=true]){
-    animation: animate-dialog-in forwards .15s ease-in;
+    animation: animate-dialog-in forwards .15s cubic-bezier(.9, 0, .1, 1);
     &::backdrop { 
       opacity: 1;
     }
   }
 
   &::backdrop {
-    transition: opacity 1s ease;
+    transition: opacity 1s cubic-bezier(.9, 0, .1, 1);
     opacity: 0;
     -webkit-backdrop-filter: blur(1rem);
     backdrop-filter: blur(1rem);

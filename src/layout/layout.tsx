@@ -14,6 +14,7 @@ const MobileNavbar = dynamic(() => import('./mobileNavbar/mobileNavbar'), {
 
 // icons
 import useBlob from './useBlob';
+import { IoFolderOpen, IoHome, IoInformation } from 'react-icons/io5';
 
 interface Props {
   children: ReactNode;
@@ -38,7 +39,22 @@ const Layout = ({ children }: Props) => {
         {children}
       </main>
       <Suspense fallback={null}>
-        <MobileNavbar />
+        <MobileNavbar
+          socials={{
+            github: 'https://github.com/amir4rab',
+            codeSandbox: 'https://codesandbox.io/u/amir4rab',
+            linkedin: 'https://www.linkedin.com/in/amir4rab/'
+          }}
+          paths={[
+            { href: '/', icon: <IoHome />, label: 'Home page' },
+            { href: '/about', icon: <IoInformation />, label: 'About page' },
+            {
+              href: '/projects',
+              icon: <IoFolderOpen />,
+              label: 'Projects page'
+            }
+          ]}
+        />
       </Suspense>
     </>
   );
