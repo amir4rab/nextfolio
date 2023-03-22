@@ -1,7 +1,7 @@
 @import '../scss/styles.scss';
 
 @layer component {
-  .main {
+  .mainLayout {
     @include while-desktop {
       max-width: var(--max-desktop-width);
       margin: 0 auto;

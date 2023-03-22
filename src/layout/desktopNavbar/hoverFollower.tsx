@@ -4,7 +4,7 @@ import { useState, useContext, useEffect } from 'react';
 import { NavbarContext } from './context';
 
 // styles
-import classes from './styles.module.scss';
+import classes from './desktopNavbar.module.scss';
 
 const HoverFollower = () => {
   const { hoveredElStats, wrapperHovering } = useContext(NavbarContext);

@@ -18,7 +18,7 @@ import { NavbarContext } from './context';
 import useHover from '@/hooks/useHover';
 
 // styles
-import classes from './styles.module.scss';
+import classes from './desktopNavbar.module.scss';
 
 interface ItemProps extends LinkProps {
   title?: string;

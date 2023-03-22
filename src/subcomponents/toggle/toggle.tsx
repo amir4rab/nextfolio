@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import classes from './styles.module.scss';
+import classes from './toggle.module.scss';
 
 interface Props {
   onChange?: (v: boolean) => void;

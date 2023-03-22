@@ -4,7 +4,7 @@ import { ReactNode, Suspense } from 'react';
 import dynamic from 'next/dynamic';
 
 // styles
-import classes from './styles.module.scss';
+import classes from './layout.module.scss';
 
 // subcomponents
 import DesktopNavbar from './desktopNavbar';
@@ -35,7 +35,7 @@ const Layout = ({ children }: Props) => {
         <DesktopNavbar.Item href='/about' title='About' />
         <DesktopNavbar.Item href='/projects' title='Projects' />
       </DesktopNavbar>
-      <main style={{ height: '300vh' }} id='__main' className={classes.main}>
+      <main style={{ height: '300vh' }} className={classes.mainLayout}>
         {children}
       </main>
       <Suspense fallback={null}>

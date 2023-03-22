@@ -19,7 +19,7 @@ import Item from './item';
 import Toggle from '@/subcomponents/toggle';
 
 // styles
-import classes from './styles.module.scss';
+import classes from './desktopNavbar.module.scss';
 
 // custom hooks
 import { useTheme } from '@/providers/themeProvider';

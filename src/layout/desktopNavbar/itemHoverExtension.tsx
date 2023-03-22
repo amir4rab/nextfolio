@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { NavbarContext } from './context';
 
 // styles
-import classes from './styles.module.scss';
+import classes from './desktopNavbar.module.scss';
 
 // framer motion variants
 const variants = {
