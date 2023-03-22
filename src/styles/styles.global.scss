@@ -1,5 +1,6 @@
 @use './variables.scss';
 @use './normalize.scss';
+@import '../scss/breakpoint';
 
 @layer normalized, component, customized;
 
@@ -11,17 +12,21 @@
 }
 
 @layer component {
+  
   html[data-color-scheme=dark] body #__blob {
     --blob-color-s: rgba(var(--pink-3-rgb), 0.25);
     --blob-color-e: rgba(var(--pink-3-rgb),0)
   }
-
+  
   html[data-color-scheme=light] body #__blob {
     --blob-color-s: rgba(var(--pink-5-rgb), 0.4);
     --blob-color-e: rgba(var(--pink-5-rgb), 0)
   }
-
+  
   #__blob {
+    @include while-mobile() {
+      display: none;
+    }
     @keyframes breath {
       0% {
         opacity: 1;

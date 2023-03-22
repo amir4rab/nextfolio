@@ -1,8 +1,11 @@
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useEffect } from 'react';
 
 const useBlob = () => {
+  const isDesktop = useMediaQuery('(min-width: 992px)');
+
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined' || !isDesktop) return;
 
     const handler = (e: MouseEvent) => {
       const blob = document.getElementById('__blob') as HTMLDivElement;
@@ -21,7 +24,7 @@ const useBlob = () => {
     return () => {
       body.removeEventListener('mousemove', handler);
     };
-  }, []);
+  }, [isDesktop]);
 
   return {};
 };
