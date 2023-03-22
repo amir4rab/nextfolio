@@ -121,8 +121,12 @@
   
   .gridRow {
     display: grid;
-    grid-template-columns: 20vw 20vw 20vw 20vw;
-    --grid-gap-spacing:  calc(calc(20vw - var(--spacing-lg) * 2) / 3);
+
+    --el-size: 19vw;
+    --grid-gap-spacing:  calc(calc(100vw - calc(var(--el-size) * 4) - var(--spacing-lg) * 2) / 3);
+    
+    grid-template-columns: repeat(4,  var(--el-size));
+
     grid-gap: var(--grid-gap-spacing);
     &:not(:last-child) {
       margin-bottom: var(--grid-gap-spacing);
@@ -133,8 +137,8 @@
     border-radius: calc(var(--radius-lg) * 1.5);
     background: var(--background-0-50);
     font-size: 8vw;
-    width: 20vw;
-    height: 20vw;
+    width: var(--el-size);
+    height: var(--el-size);
     border: none;
     text-decoration: none;
     display: flex;
